@@ -1,19 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
+import RegisterPage from './pages/RegisterPage';
 import store from './Redux/Store/Store';
 import reportWebVitals from './reportWebVitals';
-
-
-
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
   <Provider  store={store}>
     <React.StrictMode>
-        <App />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element ={<App />}/>
+          <Route path='/' element ={<RegisterPage />}/>
+        </Routes>
+      </BrowserRouter>
     </React.StrictMode>
   </Provider>
 );

@@ -3,16 +3,26 @@ import { Layout } from 'antd';
 import LoginForm from '../components/Login/LoginFrom';
 
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 function LoginPages() {
   return (
-    <Layout style={{backgroundImage: " linear-gradient(to top, #30cfd0 0%, #330867 100%)"}}>
-      <Content style={{ padding: '15% 30% 30% 30%' }}>
-        <Header>
-        <div className="logo" />
-        <h1 style={{ color: '#F5F5F5' }}>Login</h1>
-      </Header>
+     <Layout style={{
+      backgroundImage: " linear-gradient(to top, #30cfd0 0%, #330867 100%)",
+      height: '100vh'
+      }} >
+      <Content style={{
+      width: 500,
+      margin: '5% auto',
+      display: 'flex',
+      flexDirection: 'column',
+      // backgroundColor: 'white',
+      padding: 20,
+      boxShadow: '0 0 20px 8px #bfbfbf',
+      borderRadius: 5,
+   
+    }} >
+       
       <LoginForm />
       </Content>
     </Layout>
@@ -20,3 +30,4 @@ function LoginPages() {
 }
 
 export default LoginPages;
+ 
