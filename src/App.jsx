@@ -1,18 +1,16 @@
 
+import { Link } from "react-router-dom";
 import "./App.css";
-import HomePage from "./pages/HomePage/HomePage";
-import LoginPages from "./pages/LoginPages";
 
 
-function App() {
+const App = () => {
   return (
     <div>
-      {/* <HomePage></HomePage> */}
-      <LoginPages/>
       
-      
+      <Link to ="/Signin">sign in</Link>
+      <Link to ="/Signup">sign up</Link>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
