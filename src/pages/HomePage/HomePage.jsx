@@ -1,111 +1,209 @@
+import React, { useEffect, useState } from "react";
+import { Card, Space, Statistic, Table } from "antd";
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  HomeOutlined,
-  UserAddOutlined,
-  BorderOuterOutlined,
-  FormOutlined,
-  GiftOutlined,
-  ContactsOutlined,
+  UserOutlined,
+  AuditOutlined,
+  UserDeleteOutlined,
+  WhatsAppOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, theme, Pagination, Row, Col, Avatar } from "antd";
-import React, { useState } from "react";
-import "./HomePage.css";
-const { Header, Sider, Content } = Layout;
+import { getChart, getInf, getThongKe } from "../../api";
+
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const HomePage = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
+  const [staff, setStaff] = useState(0);
+  const [work, setWork] = useState(0);
+  const [rest, setRest] = useState(0);
+  const [quit, setQuit] = useState(0);
+
+  useEffect(() => {
+    getThongKe().then((res) => {
+      setStaff(res.total);
+    });
+    getChart().then((res) => {
+      setWork(res.total);
+      setRest(res.limit);
+      setQuit(res.total);
+    });
+  });
+
   return (
-    <Layout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="logo" />
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          items={[
-            {
-              key: "1",
-              icon: <HomeOutlined />,
-              label: "Home",
-            },
-            {
-              key: "2",
-              icon: <UserAddOutlined />,
-              label: "Personel Records",
-            },
-            {
-              key: "3",
-              icon: <BorderOuterOutlined />,
-              label: "Department",
-            },
-            {
-              key: "4",
-              icon: <FormOutlined />,
-              label: "Position",
-            },
-            {
-              key: "5",
-              icon: <GiftOutlined />,
-              label: "Reward and discipline",
-            },
-            {
-              key: "6",
-              icon: <ContactsOutlined />,
-              label: "Contact Information",
-            },
-          ]}
-        />
-      </Sider>
-      <Layout className="site-layout">
-        <Header
-          style={{
-            paddingLeft: 30,
-            background: colorBgContainer,
-          }}
-        >
-          <Row>
-            <Col span={18}>
-              {React.createElement(
-                collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-                {
-                  className: "trigger",
-                  onClick: () => setCollapsed(!collapsed),
-                }
-              )}
-            </Col>
-            <Col span={6}>
-              <div classname="col-user">
-                <div className="col-user-item">
-                  <Avatar size="default" icon={<UserAddOutlined />}></Avatar>
-                  <span>Vũ Hoàng</span>
-                </div>
-              </div>
-            </Col>
-          </Row>
-        </Header>
-        <Content
-          style={{
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
-            background: colorBgContainer,
-          }}
-        >
-          Content
-        </Content>
-        {/* <Pagination
-          defaultCurrent={1}
-          total={50}
-          className="pagination-layout"
-        /> */}
-        ;
-      </Layout>
-    </Layout>
+    <div className="HomePage">
+      <Space size={12} direction="vertical">
+        {/* <Typography.Title>Home</Typography.Title> */}
+        <Space direction="horizontal">
+          <HomeCard
+            icon={
+              <UserOutlined
+                style={{
+                  backgroundColor: "rgba(138, 43, 226, 0.25)",
+                  borderRadius: 12,
+                  padding: 8,
+                  color: "#66FFFF",
+                  fontSize: 24,
+                }}
+              />
+            }
+            title={"Nhân viên"}
+            value={staff}
+          ></HomeCard>
+          <HomeCard
+            icon={
+              <AuditOutlined
+                style={{
+                  backgroundColor: "rgba(184, 134, 11, 0.25)",
+                  borderRadius: 12,
+                  padding: 8,
+                  color: "#00DD00",
+                  fontSize: 24,
+                }}
+              />
+            }
+            title={"Đang làm việc"}
+            value={work}
+          ></HomeCard>
+          <HomeCard
+            icon={
+              <WhatsAppOutlined
+                style={{
+                  backgroundColor: "rgba(0,255,255,0.25)",
+                  borderRadius: 12,
+                  padding: 8,
+                  color: "#000000",
+                  fontSize: 24,
+                }}
+              />
+            }
+            title={"Nghỉ phép"}
+            value={rest}
+          ></HomeCard>
+          <HomeCard
+            icon={
+              <UserDeleteOutlined
+                style={{
+                  backgroundColor: "rgba(128, 128, 128, 0.25)",
+                  borderRadius: 12,
+                  padding: 8,
+                  color: "#FF3300",
+                  fontSize: 24,
+                }}
+              />
+            }
+            title={"Đã nghỉ việc"}
+            value={quit}
+          ></HomeCard>
+        </Space>
+        <Space>
+          <Inf />
+          <Chart />
+        </Space>
+      </Space>
+    </div>
   );
 };
 
+function HomeCard({ title, value, icon }) {
+  return (
+    <Card>
+      <Space direction="horizontal">
+        {icon}
+        <Statistic title={title} value={value} />
+      </Space>
+    </Card>
+  );
+}
+
+function Inf() {
+  const [dataSource, setDataSource] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    getInf().then((res) => {
+      setDataSource(res.users.splice(0, 3));
+      setLoading(false);
+    });
+  }, []);
+
+  return (
+    <Table
+      columns={[
+        { title: "Họ", dataIndex: "lastName" },
+        { title: "Tên", dataIndex: "firstName" },
+        { title: "Tuổi", dataIndex: "age" },
+        { title: "Giới tính", dataIndex: "gender" },
+        { title: "Email", dataIndex: "email" },
+        { title: "SDT", dataIndex: "phone" },
+      ]}
+      loading={loading}
+      dataSource={dataSource}
+      pagination={false}
+    ></Table>
+  );
+}
+
+function Chart() {
+  const [reve, setReve] = useState({
+    labels: [],
+    datasets: [],
+  });
+  useEffect(() => {
+    getChart().then((res) => {
+      const labels = res.carts.map((cart) => {
+        return `User-${cart.userId}`;
+      });
+      const data = res.carts.map((cart) => {
+        return cart.discountedTotal;
+      });
+
+      const dataSource = {
+        labels,
+        datasets: [
+          {
+            label: "",
+            data: data,
+            backgroundColor: "rgba(153, 50, 204, 0.5)",
+          },
+        ],
+      };
+      setReve(dataSource);
+    });
+  }, []);
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "bottom",
+      },
+      title: {
+        display: true,
+        text: "Thống kê",
+      },
+    },
+  };
+
+  return (
+    <Card style={{ width: 500, height: 250 }}>
+      <Bar options={options} data={reve} />
+    </Card>
+  );
+}
 export default HomePage;
