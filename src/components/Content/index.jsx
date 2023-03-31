@@ -1,10 +1,10 @@
 import React from "react";
-import AppRoutes from "./../AppRoutes/index";
+import { Outlet } from "react-router";
 
 const Content = () => {
   return (
     <div className="DbContent">
-      <AppRoutes />
+      <Outlet />
     </div>
   );
 };
