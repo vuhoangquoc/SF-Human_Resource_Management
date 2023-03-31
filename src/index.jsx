@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
-import RegisterPage from './pages/RegisterPage';
-import store from './Redux/Store/Store';
+import SignupPage from './pages/SignPage/SignupPage';
+import SigninPage from './pages/SignPage/SigninPage';
+import store from './Redux/Store';
 import reportWebVitals from './reportWebVitals';
 
 
@@ -15,7 +16,8 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path='/' element ={<App />}/>
-          <Route path='/' element ={<RegisterPage />}/>
+          <Route path='/Signin' element ={<SigninPage />}/>
+          <Route path='/Signup' element ={<SignupPage />}/>
         </Routes>
       </BrowserRouter>
     </React.StrictMode>
