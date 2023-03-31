@@ -1,52 +1,28 @@
-#components-layout-demo-custom-trigger .trigger {
-  padding: 0 24px;
-  font-size: 18px;
-  line-height: 64px;
-  cursor: pointer;
-  transition: color 0.3s;
+:root {
+  --icon-UserOutlined: rgba(138, 43, 226, 0.25);
+  --icon-AuditOutlined: rgba(184, 134, 11, 0.25);
+  --icon-WhatsAppOutlined: rgba(0, 255, 255, 0.25);
+  --icon-UserDeleteOutlined: rgba(128, 128, 128, 0.25);
+}
+.icon-all {
+  border-radius: 12px;
+  padding: 8px;
+  font-size: 24px;
 }
 
-#components-layout-demo-custom-trigger .trigger:hover {
-  color: #1890ff;
+.icon-UserOutlined {
+  background-color: var(--icon-UserOutlined);
+  color: #66ffff;
 }
-
-#components-layout-demo-custom-trigger .logo {
-  height: 32px;
-  margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+.icon-AuditOutlined {
+  background-color: var(--icon-AuditOutlined);
+  color: #00dd00;
 }
-
-/* css */
-.ant-layout {
-  height: 100%;
+.icon-WhatsAppOutlined {
+  background-color: var(--icon-WhatsAppOutlined);
+  color: #000000;
 }
-
-/* .global(col-user) */
-
-/* .header-icon {
-  width: 100px;
-  height: 100px;
-  color: #1890ff;
-} */
-
-.ant-pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.icon-UserDeleteOutlined {
+  background-color: var(--icon-UserDeleteOutlined);
+  color: #ff3300;
 }
-
-/* .col-user {
-  position: relative;
-}
-.col-user .col-user-item {
-  position: absolute;
-  right: 10px;
-}
-.col-user .col-user-item span {
-  margin-left: 50px;
-} */
-
-/* .ant-layout-header span.trigger svg {
-  width: 25px;
-  height: 25px;
-} */

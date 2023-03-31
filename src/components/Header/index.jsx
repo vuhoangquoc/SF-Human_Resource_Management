@@ -3,6 +3,7 @@ import { Image, Space, Badge, Drawer, List } from "antd";
 import { MailOutlined, BellOutlined } from "@ant-design/icons";
 import User from "../HomePage/User";
 import { getNotification } from "./../../api/index";
+import "./header.css";
 const Header = () => {
   const [notification, setNotification] = useState([]);
 
@@ -18,7 +19,7 @@ const Header = () => {
       <Space>
         <Badge count={20} dot>
           <MailOutlined
-            style={{ fontSize: 24, cursor: "pointer" }}
+            className="notification"
             onClick={() => {
               setHideMail(true);
             }}
@@ -26,7 +27,7 @@ const Header = () => {
         </Badge>
         <Badge count={notification.length}>
           <BellOutlined
-            style={{ fontSize: 24, cursor: "pointer" }}
+            className="notification"
             onClick={() => {
               setHideNotification(true);
             }}

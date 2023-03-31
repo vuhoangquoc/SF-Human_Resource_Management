@@ -5,7 +5,10 @@ import Sidebar from "./components/Sidebar/index";
 import Content from "./components/Content/index";
 import Footer from "./components/Footer/index";
 
-function App() {
+// import { Link } from "react-router-dom";
+import "./App.css";
+
+const App = () => {
   return (
     <div className="App">
       <Header />
@@ -16,6 +19,6 @@ function App() {
       <Footer />
     </div>
   );
-}
+};
 
 export default App;

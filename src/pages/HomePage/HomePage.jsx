@@ -18,6 +18,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import "./HomePage.css";
 
 ChartJS.register(
   CategoryScale,
@@ -51,61 +52,25 @@ const HomePage = () => {
         {/* <Typography.Title>Home</Typography.Title> */}
         <Space direction="horizontal">
           <HomeCard
-            icon={
-              <UserOutlined
-                style={{
-                  backgroundColor: "rgba(138, 43, 226, 0.25)",
-                  borderRadius: 12,
-                  padding: 8,
-                  color: "#66FFFF",
-                  fontSize: 24,
-                }}
-              />
-            }
+            icon={<UserOutlined className="icon-all icon-UserOutlined" />}
             title={"Nhân viên"}
             value={staff}
           ></HomeCard>
           <HomeCard
-            icon={
-              <AuditOutlined
-                style={{
-                  backgroundColor: "rgba(184, 134, 11, 0.25)",
-                  borderRadius: 12,
-                  padding: 8,
-                  color: "#00DD00",
-                  fontSize: 24,
-                }}
-              />
-            }
+            icon={<AuditOutlined className="icon-all icon-AuditOutlined" />}
             title={"Đang làm việc"}
             value={work}
           ></HomeCard>
           <HomeCard
             icon={
-              <WhatsAppOutlined
-                style={{
-                  backgroundColor: "rgba(0,255,255,0.25)",
-                  borderRadius: 12,
-                  padding: 8,
-                  color: "#000000",
-                  fontSize: 24,
-                }}
-              />
+              <WhatsAppOutlined className="icon-all icon-WhatsAppOutlined" />
             }
             title={"Nghỉ phép"}
             value={rest}
           ></HomeCard>
           <HomeCard
             icon={
-              <UserDeleteOutlined
-                style={{
-                  backgroundColor: "rgba(128, 128, 128, 0.25)",
-                  borderRadius: 12,
-                  padding: 8,
-                  color: "#FF3300",
-                  fontSize: 24,
-                }}
-              />
+              <UserDeleteOutlined className="icon-all icon-UserDeleteOutlined" />
             }
             title={"Đã nghỉ việc"}
             value={quit}

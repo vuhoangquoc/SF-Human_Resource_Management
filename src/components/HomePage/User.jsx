@@ -1,7 +1,7 @@
 import React from "react";
 import { UserAddOutlined, DownOutlined } from "@ant-design/icons";
 import { Avatar, Dropdown, Space } from "antd";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 const User = () => {
   const user = {
     name: "Vũ Hoàng",
