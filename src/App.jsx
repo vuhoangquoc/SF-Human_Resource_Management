@@ -7,8 +7,12 @@ const App = () => {
   return (
     <div>
       
-      <Link to ="/Signin">sign in</Link>
-      <Link to ="/Signup">sign up</Link>
+      <div>
+        <Link to ="/Signin">SIGN IN</Link>
+      </div>
+      <div>
+        <Link to ="/Signup">SIGN UP</Link>
+      </div>
     </div>
   )
 }

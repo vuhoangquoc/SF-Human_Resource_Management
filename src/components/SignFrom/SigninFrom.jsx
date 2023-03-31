@@ -1,8 +1,9 @@
+import React from "react";
 import { LoadingButton } from "@mui/lab";
 import { Alert, Box, Stack,Button,TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate  } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import {  Typography} from 'antd';
@@ -13,7 +14,10 @@ import { setUser } from "../../Redux/Reducer/userSlice";
 
 const { Title } = Typography;
 
-const SigninForm = ({ switchAuthState }) => {
+
+const SigninForm = () => {
+  
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [isLoginRequest, setIsLoginRequest] = useState(false);
@@ -50,12 +54,21 @@ const SigninForm = ({ switchAuthState }) => {
     }
   });
 
+  const handleButtionClick = async()=> {
+    const response = await userApi.signin({username: signinForm.values.username, password: signinForm.values.password});
+    console.log("hhh",response)
+    if(!response.err){
+      navigate("/App");
+    }
+  }
+
+
   return (
     <div>
       <Title level={1} style={{textAlign: "center"}}>SIGN IN </Title>
 
-      <Box component="form" onSubmit={signinForm.handleSubmit}>
-        <Stack spacing={3}>
+      <Box component="form" onSubmit={signinForm.handleSubmit} >
+        <Stack spacing={3} >
           <TextField value={signinForm.values.username} onChange={signinForm.handleChange}
             type="text"
             placeholder="username"
@@ -92,6 +105,7 @@ const SigninForm = ({ switchAuthState }) => {
           size="large"
           variant="contained"
           loading={isLoginRequest}
+          onClick={handleButtionClick}
         >
           sign in
         </LoadingButton>

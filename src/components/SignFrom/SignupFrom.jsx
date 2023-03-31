@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { Typography } from 'antd';
 import { toast } from "react-toastify";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import userApi from "../../Api/moudules/user.api.js";
 import { setAuthModalOpen } from "../../Redux/Reducer/authSlice";
 import { setUser } from "../../Redux/Reducer/userSlice";
@@ -15,6 +15,7 @@ import { setUser } from "../../Redux/Reducer/userSlice";
 const { Title } = Typography;
 
 const SignupForm = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [isLoginRequest, setIsLoginRequest] = useState(false);
@@ -60,6 +61,17 @@ const SignupForm = () => {
     }
   });
 
+  const handleButtionClickSignup = async()=> {
+    const response = await userApi.signup({
+      username: signinForm.values.username,
+      password: signinForm.values.password,
+      displayName: signinForm.values.password,
+      confirmPassword:signinForm.values.confirmPassword });
+    console.log("hhh",response)
+    if(!response.err){
+      navigate("/Signin");
+    }
+  }
   return (
     <>
     <Title level={1} style={{textAlign: "center", marginTop: "5px"}}>
@@ -137,6 +149,7 @@ const SignupForm = () => {
         variant="contained"
         sx={{ marginTop: 4 }}
         loading={isLoginRequest}
+        onClick={handleButtionClickSignup}
       >
         sign up
       </LoadingButton>
