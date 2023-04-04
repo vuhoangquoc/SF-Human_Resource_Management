@@ -54,8 +54,10 @@ const SigninForm = () => {
     }
   });
 
-  const handleButtionClick = async()=> {
-    const response = await userApi.signin({username: signinForm.values.username, password: signinForm.values.password});
+  const handleButtionClickSignin = async()=> {
+    const response = await userApi.signin({
+      username: signinForm.values.username, 
+      password: signinForm.values.password});
     console.log("hhh",response)
     if(!response.err){
       navigate("/App");
@@ -105,7 +107,7 @@ const SigninForm = () => {
           size="large"
           variant="contained"
           loading={isLoginRequest}
-          onClick={handleButtionClick}
+          onClick={handleButtionClickSignin}
         >
           sign in
         </LoadingButton>
