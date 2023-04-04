@@ -7,9 +7,9 @@ import { Typography } from 'antd';
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
-import userApi from "../../Api/moudules/user.api.js";
 import { setAuthModalOpen } from "../../Redux/Reducer/authSlice";
 import { setUser } from "../../Redux/Reducer/userSlice";
+import userApi from "../../api/moudules/user.api";
 
 
 const { Title } = Typography;

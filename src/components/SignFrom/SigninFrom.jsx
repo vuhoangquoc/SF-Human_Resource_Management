@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import {  Typography} from 'antd';
 import * as Yup from "yup";
-import userApi from "../../Api/moudules/user.api.js";
+import userApi from "../../api/moudules/user.api.js";
 import { setAuthModalOpen } from "../../Redux/Reducer/authSlice";
 import { setUser } from "../../Redux/Reducer/userSlice";
 
@@ -60,7 +60,7 @@ const SigninForm = () => {
       password: signinForm.values.password});
     console.log("hhh",response)
     if(!response.err){
-      navigate("/App");
+      navigate("/");
     }
   }
 

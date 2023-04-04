@@ -4,7 +4,7 @@ import SignupForm from '../../components/SignFrom/SignupFrom';
 import BackgroundImage from "../../images/12.png";
 
 const { Content } = Layout;
-const SignUpPage = () => {
+const SignupPage = () => {
   return (
     <div>
       <Layout style={{
@@ -32,4 +32,4 @@ const SignUpPage = () => {
   )
 }
 
-export default SignUpPage;
+export default SignupPage;

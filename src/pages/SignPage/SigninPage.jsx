@@ -5,7 +5,7 @@ import BackgroundImage from "../../images/12.png";
 
 const { Content } = Layout;
 
-function LoginPages() {
+function SigninPage() {
   return (
     <div>
       <Layout style={{
@@ -13,7 +13,7 @@ function LoginPages() {
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         height: '100vh'
-        }}
+        }} 
       >
         <Content style={{
           width: 500,
@@ -24,13 +24,13 @@ function LoginPages() {
           boxShadow: '0 0 35px 15px #FFFFCC',
           borderRadius: 5,
           }}
-        >
+        > 
           <SigninForm/>
           
         </Content>
       </Layout>
     </div>
-  );
+  )
 }
 
-export default LoginPages;
+export default SigninPage;
