@@ -1,18 +1,16 @@
 import React from "react";
-import { LoadingButton } from "@mui/lab";
 import { Alert, Box, Stack,Button,TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { Link,useNavigate  } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import {  Typography} from 'antd';
 import * as Yup from "yup";
 import userApi from "../../api/moudules/user.api.js";
 import { setAuthModalOpen } from "../../Redux/Reducer/authSlice";
 import { setUser } from "../../Redux/Reducer/userSlice";
 
-const { Title } = Typography;
+
 
 
 const SigninForm = () => {
@@ -39,7 +37,7 @@ const SigninForm = () => {
     onSubmit: async values => {
       setErrorMessage(undefined);
       setIsLoginRequest(true);
-      console.log("đăng nhập thành công ");
+      console.log("adafsdfg ");
       const { response, err } = await userApi.signin(values);
       setIsLoginRequest(false);
 
@@ -67,13 +65,13 @@ const SigninForm = () => {
 
   return (
     <div>
-      <Title level={1} style={{textAlign: "center"}}>SIGN IN </Title>
+     
 
       <Box component="form" onSubmit={signinForm.handleSubmit} >
         <Stack spacing={3} >
           <TextField value={signinForm.values.username} onChange={signinForm.handleChange}
             type="text"
-            placeholder="username"
+            placeholder="Username"
             name="username"
             fullWidth
             color="success"
@@ -101,7 +99,7 @@ const SigninForm = () => {
           />
         </Stack>
 
-        <LoadingButton sx={{ marginTop: 4 }}
+        <Button sx={{ marginTop: 4 }}
           type="submit"
           fullWidth
           size="large"
@@ -110,7 +108,7 @@ const SigninForm = () => {
           onClick={handleButtionClickSignin}
         >
           sign in
-        </LoadingButton>
+        </Button>
 
         <Button
           fullWidth

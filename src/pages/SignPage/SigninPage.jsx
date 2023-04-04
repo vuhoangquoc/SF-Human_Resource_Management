@@ -1,9 +1,10 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Layout,Typography } from 'antd';
 import SigninForm from '../../components/SignFrom/SigninFrom';
 import BackgroundImage from "../../images/12.png";
 
 const { Content } = Layout;
+const { Title } = Typography;
 
 function SigninPage() {
   return (
@@ -25,6 +26,7 @@ function SigninPage() {
           borderRadius: 5,
           }}
         > 
+           <Title level={1} style={{textAlign: "center"}}>SIGN IN </Title>
           <SigninForm/>
           
         </Content>
