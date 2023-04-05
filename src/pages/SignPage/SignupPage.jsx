@@ -25,8 +25,7 @@ const SignupPage = () => {
           borderRadius: 5,
           }}
         > 
-          <Title level={1} style={{textAlign: "center", marginTop: "5px"}}>
-    SIGN UP </Title>
+          <Title level={1} style={{textAlign: "center", marginTop: "5px"}}>ĐĂNG KÝ  </Title>
           <SignupForm/>
           
         </Content>

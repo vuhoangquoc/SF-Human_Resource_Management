@@ -26,7 +26,7 @@ function SigninPage() {
           borderRadius: 5,
           }}
         > 
-           <Title level={1} style={{textAlign: "center"}}>SIGN IN </Title>
+           <Title level={1} style={{textAlign: "center"}}>ĐĂNG NHẬP </Title>
           <SigninForm/>
           
         </Content>

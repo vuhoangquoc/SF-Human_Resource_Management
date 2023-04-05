@@ -11,8 +11,6 @@ import { setAuthModalOpen } from "../../Redux/Reducer/authSlice";
 import { setUser } from "../../Redux/Reducer/userSlice";
 
 
-
-
 const SigninForm = () => {
   
   const navigate = useNavigate();
@@ -71,7 +69,7 @@ const SigninForm = () => {
         <Stack spacing={3} >
           <TextField value={signinForm.values.username} onChange={signinForm.handleChange}
             type="text"
-            placeholder="Username"
+            placeholder="Họ & Tên"
             name="username"
             fullWidth
             color="success"
@@ -85,7 +83,7 @@ const SigninForm = () => {
           />
           <TextField value={signinForm.values.password} onChange={signinForm.handleChange}
             type="password"
-            placeholder="Userpassword"
+            placeholder="Mật Khẩu"
             name="password"
             fullWidth
             color="primary"
@@ -107,14 +105,14 @@ const SigninForm = () => {
           loading={isLoginRequest}
           onClick={handleButtionClickSignin}
         >
-          sign in
+          Đăng Nhập
         </Button>
 
         <Button
           fullWidth
           sx={{ marginTop: 2 }}
         >
-        <Link to ="/Signup">sign up</Link>
+        <Link to ="/Signup">Đăng Ký </Link>
 
         </Button>
 

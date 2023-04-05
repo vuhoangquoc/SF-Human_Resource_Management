@@ -10,8 +10,6 @@ import { setUser } from "../../Redux/Reducer/userSlice";
 import userApi from "../../api/moudules/user.api";
 
 
-
-
 const SignupForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -75,7 +73,7 @@ const SignupForm = () => {
       <Stack spacing={3}>
         <TextField value={signinForm.values.username} onChange={signinForm.handleChange}
           type="text"
-          placeholder="Username"
+          placeholder="Họ & Tên"
           name="username"
           fullWidth
           color="success"
@@ -89,7 +87,7 @@ const SignupForm = () => {
         />
         <TextField
           type="text"
-          placeholder="Display Name"
+          placeholder="Tên hiển thị "
           name="displayName"
           fullWidth
           value={signinForm.values.displayName}
@@ -105,7 +103,7 @@ const SignupForm = () => {
         />
         <TextField
           type="password"
-          placeholder="Userpassword"
+          placeholder="Mật khẩu"
           name="password"
           fullWidth
           value={signinForm.values.password}
@@ -121,7 +119,7 @@ const SignupForm = () => {
         />
         <TextField
           type="password"
-          placeholder="Confirm Password"
+          placeholder="Nhập lại mật khẩu"
           name="confirmPassword"
           fullWidth
           value={signinForm.values.confirmPassword}
@@ -146,7 +144,7 @@ const SignupForm = () => {
         loading={isLoginRequest}
         onClick={handleButtionClickSignup}
       >
-        sign up
+        Đăng Ký
       </Button>
 
       {errorMessage && (
