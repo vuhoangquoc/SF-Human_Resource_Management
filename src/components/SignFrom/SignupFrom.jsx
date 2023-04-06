@@ -26,18 +26,18 @@ const SignupForm = () => {
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .min(8, "username minimum 8 characters")
-        .required("username is required"),
+        .min(8, "tên người dùng tối thiểu 8 ký tự")
+        .required("tên người dùng là bắt buộc"),
       password: Yup.string()
-        .min(8, "password minimum 8 characters")
-        .required("password is required"),
+        .min(8, "mật khẩu tối thiểu 8 ký tự")
+        .required("mật khẩu là bắt buộc"),
       displayName: Yup.string()
-        .min(5, "displayName minimum 8 characters")
-        .required("displayName is required"),
+        .min(5, "Tên hiển thị tối thiểu 5 ký tự")
+        .required("Tên hiển thị là bắt buộc"),
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password")], "confirmPassword not match")
-        .min(8, "confirmPassword minimum 8 characters")
-        .required("confirmPassword is required")
+        .oneOf([Yup.ref("password")], "xác nhận Mật khẩu không khớp")
+        .min(8, "xác nhậnMật khẩu tối thiểu 8 ký tự")
+        .required("Xác nhận mật khẩu là bắt buộc")
     }),
     onSubmit: async values => {
       setErrorMessage(undefined);
@@ -50,7 +50,7 @@ const SignupForm = () => {
         signinForm.resetForm();
         dispatch(setUser(response));
         dispatch(setAuthModalOpen(false));
-        toast.success("Sign in success");
+        toast.success("Đăng ký thành công");
       }
 
       if (err) setErrorMessage(err.message);
@@ -66,7 +66,7 @@ const SignupForm = () => {
     console.log("hhh",response)
     if(!response.err){
       navigate("/Signin");
-    }
+    } 
   }
   return (
     <Box component="form" onSubmit={signinForm.handleSubmit}>
@@ -149,7 +149,9 @@ const SignupForm = () => {
 
       {errorMessage && (
         <Box sx={{ marginTop: 2 }}>
-          <Alert severity="error" variant="outlined" >{errorMessage}</Alert>
+          <Alert variant="filled" severity="error">
+                đăng ký thất bại  {errorMessage}
+          </Alert>
         </Box>
       )}
     </Box>

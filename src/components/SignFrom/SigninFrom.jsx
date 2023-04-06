@@ -26,11 +26,11 @@ const SigninForm = () => {
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .min(8, "username minimum 8 characters")
-        .required("username is required"),
+        .min(8, "tên người dùng tối thiểu 8 ký tự")
+        .required("tên người dùng là bắt buộc"),
       password: Yup.string()
-        .min(8, "password minimum 8 characters")
-        .required("password is required")
+        .min(8, "mật khẩu tối thiểu 8 ký tự")
+        .required("mật khẩu là bắt buộc")
     }),
     onSubmit: async values => {
       setErrorMessage(undefined);
@@ -43,7 +43,7 @@ const SigninForm = () => {
         signinForm.resetForm();
         dispatch(setUser(response));
         dispatch(setAuthModalOpen(false));
-        toast.success("Sign in success");
+        toast.success("Đăng nhập thành công");
       }
 
       if (err) setErrorMessage(err.message);
@@ -118,8 +118,8 @@ const SigninForm = () => {
 
         {errorMessage && (
           <Box sx={{ marginTop: 2 }}>
-            <Alert severity="error" variant="outlined" >
-              {errorMessage}
+          <Alert variant="filled" severity="error">
+                đăng nhập thất bại  
             </Alert>
           </Box>
         )}
