@@ -1,0 +1,28 @@
+:root {
+  --icon-UserOutlined: rgba(138, 43, 226, 0.25);
+  --icon-AuditOutlined: rgba(184, 134, 11, 0.25);
+  --icon-WhatsAppOutlined: rgba(0, 255, 255, 0.25);
+  --icon-UserDeleteOutlined: rgba(128, 128, 128, 0.25);
+}
+.icon-all {
+  border-radius: 12px;
+  padding: 8px;
+  font-size: 24px;
+}
+
+.icon-UserOutlined {
+  background-color: var(--icon-UserOutlined);
+  color: #66ffff;
+}
+.icon-AuditOutlined {
+  background-color: var(--icon-AuditOutlined);
+  color: #00dd00;
+}
+.icon-WhatsAppOutlined {
+  background-color: var(--icon-WhatsAppOutlined);
+  color: #000000;
+}
+.icon-UserDeleteOutlined {
+  background-color: var(--icon-UserDeleteOutlined);
+  color: #ff3300;
+}
