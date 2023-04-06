@@ -1,10 +1,11 @@
 import React from 'react'
-import { Layout } from 'antd';
+import { Layout,Typography } from 'antd';
 import SignupForm from '../../components/SignFrom/SignupFrom';
 import BackgroundImage from "../../images/12.png";
 
 const { Content } = Layout;
-const SignUpPage = () => {
+const { Title } = Typography;
+const SignupPage = () => {
   return (
     <div>
       <Layout style={{
@@ -24,6 +25,7 @@ const SignUpPage = () => {
           borderRadius: 5,
           }}
         > 
+          <Title level={1} style={{textAlign: "center", marginTop: "5px"}}>ĐĂNG KÝ  </Title>
           <SignupForm/>
           
         </Content>
@@ -32,4 +34,4 @@ const SignUpPage = () => {
   )
 }
 
-export default SignUpPage;
+export default SignupPage;

@@ -1,20 +1,17 @@
-import { LoadingButton } from "@mui/lab";
-import { Alert, Box, Button, Stack, TextField } from "@mui/material";
+import { Alert, Box,Button, Stack, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Typography } from 'antd';
 import { toast } from "react-toastify";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
-import userApi from "../../Api/moudules/user.api.js";
+import {  useNavigate } from "react-router-dom";
 import { setAuthModalOpen } from "../../Redux/Reducer/authSlice";
 import { setUser } from "../../Redux/Reducer/userSlice";
+import userApi from "../../api/moudules/user.api";
 
-
-const { Title } = Typography;
 
 const SignupForm = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [isLoginRequest, setIsLoginRequest] = useState(false);
@@ -35,7 +32,7 @@ const SignupForm = () => {
         .min(8, "password minimum 8 characters")
         .required("password is required"),
       displayName: Yup.string()
-        .min(8, "displayName minimum 8 characters")
+        .min(5, "displayName minimum 8 characters")
         .required("displayName is required"),
       confirmPassword: Yup.string()
         .oneOf([Yup.ref("password")], "confirmPassword not match")
@@ -60,15 +57,23 @@ const SignupForm = () => {
     }
   });
 
+  const handleButtionClickSignup = async()=> {
+    const response = await userApi.signup({
+      username: signinForm.values.username,
+      password: signinForm.values.password,
+      displayName: signinForm.values.password,
+      confirmPassword:signinForm.values.confirmPassword });
+    console.log("hhh",response)
+    if(!response.err){
+      navigate("/Signin");
+    }
+  }
   return (
-    <>
-    <Title level={1} style={{textAlign: "center", marginTop: "5px"}}>
-    SIGN UP </Title>
     <Box component="form" onSubmit={signinForm.handleSubmit}>
       <Stack spacing={3}>
         <TextField value={signinForm.values.username} onChange={signinForm.handleChange}
           type="text"
-          placeholder="Username"
+          placeholder="Họ & Tên"
           name="username"
           fullWidth
           color="success"
@@ -82,7 +87,7 @@ const SignupForm = () => {
         />
         <TextField
           type="text"
-          placeholder="Display Name"
+          placeholder="Tên hiển thị "
           name="displayName"
           fullWidth
           value={signinForm.values.displayName}
@@ -98,7 +103,7 @@ const SignupForm = () => {
         />
         <TextField
           type="password"
-          placeholder="Userpassword"
+          placeholder="Mật khẩu"
           name="password"
           fullWidth
           value={signinForm.values.password}
@@ -114,7 +119,7 @@ const SignupForm = () => {
         />
         <TextField
           type="password"
-          placeholder="Confirm Password"
+          placeholder="Nhập lại mật khẩu"
           name="confirmPassword"
           fullWidth
           value={signinForm.values.confirmPassword}
@@ -130,22 +135,16 @@ const SignupForm = () => {
         />
       </Stack>
 
-      <LoadingButton
+      <Button
         type="submit"
         fullWidth
         size="large"
         variant="contained"
         sx={{ marginTop: 4 }}
         loading={isLoginRequest}
+        onClick={handleButtionClickSignup}
       >
-        sign up
-      </LoadingButton>
-
-      <Button
-        fullWidth
-        sx={{ marginTop: 1 }}
-      >
-        <Link to ="/Signin">sign in</Link>
+        Đăng Ký
       </Button>
 
       {errorMessage && (
@@ -154,7 +153,6 @@ const SignupForm = () => {
         </Box>
       )}
     </Box>
-    </>
   );
 };
 

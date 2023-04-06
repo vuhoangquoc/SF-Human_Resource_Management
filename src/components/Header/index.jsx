@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Image, Space, Badge, Drawer, List } from "antd";
 import { MailOutlined, BellOutlined } from "@ant-design/icons";
 import User from "../HomePage/User";
-import { getNotification } from "./../../api/index";
+import { getNotification } from "../../api/index";
 import "./header.css";
 const Header = () => {
   const [notification, setNotification] = useState([]);
