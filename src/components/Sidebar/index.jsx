@@ -33,7 +33,7 @@ const Sidebar = () => {
           {
             key: "/",
             icon: <HomeOutlined />,
-            label: "Home",
+            label: "Trang chủ",
           },
           {
             key: "/personel",
