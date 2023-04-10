@@ -1,21 +1,17 @@
-// import { LoadingButton } from "@mui/lab";
-import { LoadingButton } from "@mui/lab";
+import React from "react";
 import { Alert, Box, Stack, Button, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { Typography } from "antd";
 import * as Yup from "yup";
-// import userApi from "../../Api/moudules/user.api.js";
+import userApi from "../../api/moudules/user.api.js";
 import { setAuthModalOpen } from "../../Redux/Reducer/authSlice";
 import { setUser } from "../../Redux/Reducer/userSlice";
-import userApi from "./../../api/moudules/user.api";
 
-const { Title } = Typography;
-
-const SigninForm = ({ switchAuthState }) => {
+const SigninForm = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [isLoginRequest, setIsLoginRequest] = useState(false);
@@ -37,7 +33,7 @@ const SigninForm = ({ switchAuthState }) => {
     onSubmit: async (values) => {
       setErrorMessage(undefined);
       setIsLoginRequest(true);
-      console.log("đăng nhập thành công ");
+      console.log("adafsdfg ");
       const { response, err } = await userApi.signin(values);
       setIsLoginRequest(false);
 
@@ -52,19 +48,26 @@ const SigninForm = ({ switchAuthState }) => {
     },
   });
 
+  const handleButtionClickSignin = async () => {
+    const response = await userApi.signin({
+      username: signinForm.values.username,
+      password: signinForm.values.password,
+    });
+    console.log("hhh", response);
+    if (!response.err) {
+      navigate("/");
+    }
+  };
+
   return (
     <div>
-      <Title level={1} style={{ textAlign: "center" }}>
-        SIGN IN{" "}
-      </Title>
-
       <Box component="form" onSubmit={signinForm.handleSubmit}>
         <Stack spacing={3}>
           <TextField
             value={signinForm.values.username}
             onChange={signinForm.handleChange}
             type="text"
-            placeholder="username"
+            placeholder="Họ & Tên"
             name="username"
             fullWidth
             color="success"
@@ -85,7 +88,7 @@ const SigninForm = ({ switchAuthState }) => {
             value={signinForm.values.password}
             onChange={signinForm.handleChange}
             type="password"
-            placeholder="Userpassword"
+            placeholder="Mật Khẩu"
             name="password"
             fullWidth
             color="primary"
@@ -104,19 +107,20 @@ const SigninForm = ({ switchAuthState }) => {
           />
         </Stack>
 
-        <LoadingButton
+        <Button
           sx={{ marginTop: 4 }}
           type="submit"
           fullWidth
           size="large"
           variant="contained"
           loading={isLoginRequest}
+          onClick={handleButtionClickSignin}
         >
-          sign in
-        </LoadingButton>
+          Đăng Nhập
+        </Button>
 
         <Button fullWidth sx={{ marginTop: 2 }}>
-          <Link to="/Signup">sign up</Link>
+          <Link to="/Signup">Đăng Ký </Link>
         </Button>
 
         {errorMessage && (

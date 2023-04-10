@@ -5,6 +5,9 @@ import PersonelPage from "./pages/PersonelRecord/PersonelPage";
 import LoginPages from "./pages/SignPage/SigninPage";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import SignUpPage from "./pages/SignPage/SignupPage";
+import SignupPage from "./pages/SignPage/SignupPage";
+import SigninPage from "./pages/SignPage/SigninPage";
+import PartitivePage from "./components/Partitiva";
 
 const router = createBrowserRouter([
   {
@@ -22,11 +25,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/signin",
-    element: <LoginPages />,
+    element: <SigninPage />,
   },
   {
     path: "/signup",
-    element: <SignUpPage />,
+    element: <SignupPage />,
+  },
+  {
+    path: "/Partitive",
+    element: <PartitivePage />,
   },
 ]);
 

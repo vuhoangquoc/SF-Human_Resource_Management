@@ -1,11 +1,12 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Layout,Typography } from 'antd';
 import SigninForm from '../../components/SignFrom/SigninFrom';
 import BackgroundImage from "../../images/12.png";
 
 const { Content } = Layout;
+const { Title } = Typography;
 
-function LoginPages() {
+function SigninPage() {
   return (
     <div>
       <Layout style={{
@@ -13,7 +14,7 @@ function LoginPages() {
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         height: '100vh'
-        }}
+        }} 
       >
         <Content style={{
           width: 500,
@@ -24,13 +25,14 @@ function LoginPages() {
           boxShadow: '0 0 35px 15px #FFFFCC',
           borderRadius: 5,
           }}
-        >
+        > 
+           <Title level={1} style={{textAlign: "center"}}>ĐĂNG NHẬP </Title>
           <SigninForm/>
           
         </Content>
       </Layout>
     </div>
-  );
+  )
 }
 
-export default LoginPages;
+export default SigninPage;
