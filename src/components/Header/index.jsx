@@ -16,53 +16,66 @@ const Header = () => {
   }, []);
   return (
     <div className="DbHeader">
-      <Space>
-        <Badge count={20} dot>
-          <MailOutlined
-            className="notification"
-            onClick={() => {
-              setHideMail(true);
-            }}
-          />
-        </Badge>
-        <Badge count={notification.length}>
-          <BellOutlined
-            className="notification"
-            onClick={() => {
-              setHideNotification(true);
-            }}
-          />
-        </Badge>
-      </Space>
-      {/* <Typography.Title>TMA Solutions</Typography.Title> */}
       <Image
         width={60}
         src="https://www.tmainnovation.com/wp-content/uploads/2020/06/TMA-Innovation-Logo.png"
       ></Image>
-      <User />
-      <Drawer
-        title="Thông báo"
-        open={hideNotification}
-        onClose={() => {
-          setHideNotification(false);
-        }}
-        markClosable
-      ></Drawer>
-      <Drawer
-        title="Mail"
-        open={hideMail}
-        onClose={() => {
-          setHideMail(false);
-        }}
-        markClosable
-      >
-        <List
-          dataSource={notification}
-          renderItem={(item) => {
-            return <List.Item>{item.body}</List.Item>;
+      <div className="DbHeader_item">
+        <Space style={{ paddingRight: 25 }}>
+          <Badge count={20} dot>
+            <MailOutlined
+              className="notification"
+              onClick={() => {
+                setHideMail(true);
+              }}
+            />
+          </Badge>
+          <Badge count={notification.length}>
+            <BellOutlined
+              className="notification"
+              onClick={() => {
+                setHideNotification(true);
+              }}
+            />
+          </Badge>
+        </Space>
+        {/* <Typography.Title>TMA Solutions</Typography.Title> */}
+        {/* <Image
+        width={60}
+        src="https://www.tmainnovation.com/wp-content/uploads/2020/06/TMA-Innovation-Logo.png"
+      ></Image> */}
+        <User />
+        <Drawer
+          title="Thông báo"
+          open={hideNotification}
+          onClose={() => {
+            setHideNotification(false);
           }}
-        ></List>
-      </Drawer>
+          markClosable
+        >
+          <List
+            dataSource={notification}
+            renderItem={(item) => {
+              return <List.Item>{item.body}</List.Item>;
+            }}
+          ></List>
+        </Drawer>
+        <Drawer
+          title="Mail"
+          open={hideMail}
+          onClose={() => {
+            setHideMail(false);
+          }}
+          markClosable
+        >
+          <List
+            dataSource={notification}
+            renderItem={(item) => {
+              return <List.Item>{item.body}</List.Item>;
+            }}
+          ></List>
+        </Drawer>
+      </div>
     </div>
   );
 };

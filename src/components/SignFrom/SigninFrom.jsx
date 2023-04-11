@@ -1,8 +1,8 @@
 import React from "react";
-import { Alert, Box, Stack,Button,TextField } from "@mui/material";
+import { Alert, Box, Stack, Button, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { Link,useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
@@ -10,9 +10,7 @@ import userApi from "../../api/moudules/user.api.js";
 import { setAuthModalOpen } from "../../Redux/Reducer/authSlice";
 import { setUser } from "../../Redux/Reducer/userSlice";
 
-
 const SigninForm = () => {
-  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -22,7 +20,7 @@ const SigninForm = () => {
   const signinForm = useFormik({
     initialValues: {
       password: "",
-      username: ""
+      username: "",
     },
     validationSchema: Yup.object({
       username: Yup.string()
@@ -30,9 +28,9 @@ const SigninForm = () => {
         .required("username is required"),
       password: Yup.string()
         .min(8, "password minimum 8 characters")
-        .required("password is required")
+        .required("password is required"),
     }),
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       setErrorMessage(undefined);
       setIsLoginRequest(true);
       console.log("adafsdfg ");
@@ -47,57 +45,70 @@ const SigninForm = () => {
       }
 
       if (err) setErrorMessage(err.message);
-    }
+    },
   });
 
-  const handleButtionClickSignin = async()=> {
+  const handleButtionClickSignin = async () => {
     const response = await userApi.signin({
-      username: signinForm.values.username, 
-      password: signinForm.values.password});
-    console.log("hhh",response)
-    if(!response.err){
+      username: signinForm.values.username,
+      password: signinForm.values.password,
+    });
+    console.log("hhh", response);
+    if (!response.err) {
       navigate("/");
     }
-  }
-
+  };
 
   return (
     <div>
-     
-
-      <Box component="form" onSubmit={signinForm.handleSubmit} >
-        <Stack spacing={3} >
-          <TextField value={signinForm.values.username} onChange={signinForm.handleChange}
+      <Box component="form" onSubmit={signinForm.handleSubmit}>
+        <Stack spacing={3}>
+          <TextField
+            value={signinForm.values.username}
+            onChange={signinForm.handleChange}
             type="text"
             placeholder="Họ & Tên"
             name="username"
             fullWidth
             color="success"
-            error={signinForm.touched.username && signinForm.errors.username !== undefined}
-            helperText={signinForm.touched.username && signinForm.errors.username}
+            error={
+              signinForm.touched.username &&
+              signinForm.errors.username !== undefined
+            }
+            helperText={
+              signinForm.touched.username && signinForm.errors.username
+            }
             InputProps={{
               style: {
                 fontWeight: "bold",
-              }, 
+              },
             }}
           />
-          <TextField value={signinForm.values.password} onChange={signinForm.handleChange}
+          <TextField
+            value={signinForm.values.password}
+            onChange={signinForm.handleChange}
             type="password"
             placeholder="Mật Khẩu"
             name="password"
             fullWidth
             color="primary"
-            error={signinForm.touched.password && signinForm.errors.password !== undefined}
-            helperText={signinForm.touched.password && signinForm.errors.password}
+            error={
+              signinForm.touched.password &&
+              signinForm.errors.password !== undefined
+            }
+            helperText={
+              signinForm.touched.password && signinForm.errors.password
+            }
             InputProps={{
               style: {
                 fontWeight: "bold",
-              }, 
+              },
             }}
           />
         </Stack>
 
-        <Button sx={{ marginTop: 4 }}
+        <Button
+          sx={{ marginTop: 4 }}
           type="submit"
           fullWidth
           size="large"
@@ -108,17 +119,13 @@ const SigninForm = () => {
           Đăng Nhập
         </Button>
 
-        <Button
-          fullWidth
-          sx={{ marginTop: 2 }}
-        >
-        <Link to ="/Signup">Đăng Ký </Link>
-
+        <Button fullWidth sx={{ marginTop: 2 }}>
+          <Link to="/Signup">Đăng Ký </Link>
         </Button>
 
         {errorMessage && (
           <Box sx={{ marginTop: 2 }}>
-            <Alert severity="error" variant="outlined" >
+            <Alert severity="error" variant="outlined">
               {errorMessage}
             </Alert>
           </Box>
