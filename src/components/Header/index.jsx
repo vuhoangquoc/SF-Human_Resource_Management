@@ -4,6 +4,8 @@ import { MailOutlined, BellOutlined } from "@ant-design/icons";
 import User from "../HomePage/User";
 import { getNotification } from "../../api/index";
 import "./header.css";
+
+
 const Header = () => {
   const [notification, setNotification] = useState([]);
 
@@ -39,7 +41,7 @@ const Header = () => {
         width={60}
         src="https://www.tmainnovation.com/wp-content/uploads/2020/06/TMA-Innovation-Logo.png"
       ></Image>
-      <User />
+      <User/>
       <Drawer
         title="Thông báo"
         open={hideNotification}

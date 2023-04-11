@@ -19,7 +19,7 @@ const Partitive =() =>{
       status: "",
     };
     setdata([...data, newItem]);
-    setInputValue("");
+    setInputValue(""); 
   };
 
   const handleInputChange = (event) => {
@@ -64,10 +64,10 @@ const Partitive =() =>{
     setdata(newData);
   };
   
-  
   return (
     <Space size={20} direction="vertical">
       <Typography.Title level={4}>Partitive</Typography.Title>
+
       <Space size="middle">
         <Input
           value={inputValue}
@@ -76,6 +76,7 @@ const Partitive =() =>{
         />
         <Button onClick={handleAdd}>Thêm</Button>
       </Space>
+
       <Space>
       <Modal
         title="Edit Row"
@@ -94,11 +95,11 @@ const Partitive =() =>{
               placeholder="Age"
               value={departmentIdInput}
               onChange={(e) => setDepartmentId(e.target.value)}
-            />
-          </>
+            /></>
         )}
       </Modal>
       </Space>
+
       <Table 
         columns={[
           {
@@ -129,18 +130,21 @@ const Partitive =() =>{
                   title="Bạn có chắc chắn muốn xóa?"
                   onConfirm={() => handleDelete(record)}
                 > 
-                 <Button> <DeleteOutlined style={{color: "red"}}/></Button>
+                  <Button>
+                    <DeleteOutlined style={{color: "red"}}/>
+                  </Button>
                 </Popconfirm>
               </Space>
             )
           }
         ]}
-          dataSource={data}
-          pagination={{
-            pageSize: 5
-          }}
+
+      dataSource={data}
+      pagination={{
+        pageSize: 5
+      }}
     />
-      </Space>
+    </Space>
   );
 };
 

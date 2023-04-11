@@ -60,11 +60,8 @@ const SigninForm = () => {
     }
   }
 
-
   return (
     <div>
-     
-
       <Box component="form" onSubmit={signinForm.handleSubmit} >
         <Stack spacing={3} >
           <TextField value={signinForm.values.username} onChange={signinForm.handleChange}
@@ -102,6 +99,7 @@ const SigninForm = () => {
           fullWidth
           size="large"
           variant="contained"
+
           loading={isLoginRequest}
           onClick={handleButtionClickSignin}
         >
@@ -109,10 +107,11 @@ const SigninForm = () => {
         </Button>
 
         <Button
+          size="large"
           fullWidth
-          sx={{ marginTop: 2 }}
+          sx={{ marginTop: 3 }}
         >
-        <Link to ="/Signup">Đăng Ký </Link>
+        <Link to ="/Signup" style={{color: "white"}}>Đăng Ký </Link>
 
         </Button>
 

@@ -101,7 +101,7 @@ const SignupForm = () => {
               }, 
             }}
         />
-        <TextField
+        <TextField style={{color: "red"}}
           type="password"
           placeholder="Mật khẩu"
           name="password"
@@ -150,7 +150,7 @@ const SignupForm = () => {
       {errorMessage && (
         <Box sx={{ marginTop: 2 }}>
           <Alert variant="filled" severity="error">
-                đăng ký thất bại  {errorMessage}
+                đăng ký thất bại  
           </Alert>
         </Box>
       )}
