@@ -1,8 +1,8 @@
 import React from "react";
-import { Alert, Box, Stack,Button,TextField } from "@mui/material";
+import { Alert, Box, Stack, Button, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { Link,useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
@@ -10,9 +10,7 @@ import userApi from "../../api/moudules/user.api.js";
 import { setAuthModalOpen } from "../../Redux/Reducer/authSlice";
 import { setUser } from "../../Redux/Reducer/userSlice";
 
-
 const SigninForm = () => {
-  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -22,7 +20,7 @@ const SigninForm = () => {
   const signinForm = useFormik({
     initialValues: {
       password: "",
-      username: ""
+      username: "",
     },
     validationSchema: Yup.object({
       username: Yup.string()
@@ -30,9 +28,9 @@ const SigninForm = () => {
         .required("tên người dùng là bắt buộc"),
       password: Yup.string()
         .min(8, "mật khẩu tối thiểu 8 ký tự")
-        .required("mật khẩu là bắt buộc")
+        .required("mật khẩu là bắt buộc"),
     }),
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       setErrorMessage(undefined);
       setIsLoginRequest(true);
       console.log("adafsdfg ");
@@ -47,15 +45,16 @@ const SigninForm = () => {
       }
 
       if (err) setErrorMessage(err.message);
-    }
+    },
   });
 
-  const handleButtionClickSignin = async()=> {
+  const handleButtionClickSignin = async () => {
     const response = await userApi.signin({
-      username: signinForm.values.username, 
-      password: signinForm.values.password});
-    console.log("hhh",response)
-    if(!response.err){
+      username: signinForm.values.username,
+      password: signinForm.values.password,
+    });
+    console.log("hhh", response);
+    if (!response.err) {
       navigate("/");
     }
   }
@@ -70,31 +69,44 @@ const SigninForm = () => {
             name="username"
             fullWidth
             color="success"
-            error={signinForm.touched.username && signinForm.errors.username !== undefined}
-            helperText={signinForm.touched.username && signinForm.errors.username}
+            error={
+              signinForm.touched.username &&
+              signinForm.errors.username !== undefined
+            }
+            helperText={
+              signinForm.touched.username && signinForm.errors.username
+            }
             InputProps={{
               style: {
                 fontWeight: "bold",
-              }, 
+              },
             }}
           />
-          <TextField value={signinForm.values.password} onChange={signinForm.handleChange}
+          <TextField
+            value={signinForm.values.password}
+            onChange={signinForm.handleChange}
             type="password"
             placeholder="Mật Khẩu"
             name="password"
             fullWidth
             color="primary"
-            error={signinForm.touched.password && signinForm.errors.password !== undefined}
-            helperText={signinForm.touched.password && signinForm.errors.password}
+            error={
+              signinForm.touched.password &&
+              signinForm.errors.password !== undefined
+            }
+            helperText={
+              signinForm.touched.password && signinForm.errors.password
+            }
             InputProps={{
               style: {
                 fontWeight: "bold",
-              }, 
+              },
             }}
           />
         </Stack>
 
-        <Button sx={{ marginTop: 4 }}
+        <Button
+          sx={{ marginTop: 4 }}
           type="submit"
           fullWidth
           size="large"

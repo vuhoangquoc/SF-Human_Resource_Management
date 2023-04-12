@@ -36,13 +36,20 @@ const HomePage = () => {
   const [quit, setQuit] = useState(0);
 
   useEffect(() => {
-    getThongKe().then((res) => {
-      setStaff(res.total);
-    });
+    const localData = localStorage.getItem("usersData");
+    if (localData && localData.length !== 0) {
+      console.log(JSON.parse(localData));
+      setStaff(JSON.parse(localData).length);
+    }
+  });
+  useEffect(() => {
+    // getThongKe().then((res) => {
+    //   setStaff(res.users.length); // đãy lấy được số lượng user
+    // });
     getChart().then((res) => {
       setWork(res.total);
       setRest(res.limit);
-      setQuit(res.total);
+      // setQuit(res.total);
     });
   });
 
