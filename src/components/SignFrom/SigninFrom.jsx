@@ -24,11 +24,11 @@ const SigninForm = () => {
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .min(8, "username minimum 8 characters")
-        .required("username is required"),
+        .min(8, "tên người dùng tối thiểu 8 ký tự")
+        .required("tên người dùng là bắt buộc"),
       password: Yup.string()
-        .min(8, "password minimum 8 characters")
-        .required("password is required"),
+        .min(8, "mật khẩu tối thiểu 8 ký tự")
+        .required("mật khẩu là bắt buộc"),
     }),
     onSubmit: async (values) => {
       setErrorMessage(undefined);
@@ -41,7 +41,7 @@ const SigninForm = () => {
         signinForm.resetForm();
         dispatch(setUser(response));
         dispatch(setAuthModalOpen(false));
-        toast.success("Sign in success");
+        toast.success("Đăng nhập thành công");
       }
 
       if (err) setErrorMessage(err.message);
@@ -57,15 +57,13 @@ const SigninForm = () => {
     if (!response.err) {
       navigate("/");
     }
-  };
+  }
 
   return (
     <div>
-      <Box component="form" onSubmit={signinForm.handleSubmit}>
-        <Stack spacing={3}>
-          <TextField
-            value={signinForm.values.username}
-            onChange={signinForm.handleChange}
+      <Box component="form" onSubmit={signinForm.handleSubmit} >
+        <Stack spacing={3} >
+          <TextField value={signinForm.values.username} onChange={signinForm.handleChange}
             type="text"
             placeholder="Họ & Tên"
             name="username"
@@ -113,20 +111,26 @@ const SigninForm = () => {
           fullWidth
           size="large"
           variant="contained"
+
           loading={isLoginRequest}
           onClick={handleButtionClickSignin}
         >
           Đăng Nhập
         </Button>
 
-        <Button fullWidth sx={{ marginTop: 2 }}>
-          <Link to="/Signup">Đăng Ký </Link>
+        <Button
+          size="large"
+          fullWidth
+          sx={{ marginTop: 3 }}
+        >
+        <Link to ="/Signup" style={{color: "white"}}>Đăng Ký </Link>
+
         </Button>
 
         {errorMessage && (
           <Box sx={{ marginTop: 2 }}>
-            <Alert severity="error" variant="outlined">
-              {errorMessage}
+          <Alert variant="filled" severity="error">
+                đăng nhập thất bại  
             </Alert>
           </Box>
         )}
