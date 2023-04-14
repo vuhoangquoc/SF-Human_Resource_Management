@@ -8,6 +8,7 @@ import SignUpPage from "./pages/SignPage/SignupPage";
 import SignupPage from "./pages/SignPage/SignupPage";
 import SigninPage from "./pages/SignPage/SigninPage";
 import PartitivePage from "./components/Partitiva";
+import As from "./position-management";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,8 @@ const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/home", element: <HomePage /> },
       { path: "/personel", element: <PersonelPage /> },
+      { path: "/department", element: <PartitivePage /> },
+      { path: "/position", element: <As /> },
       {
         path: "/profile/:userId",
         element: <UserProfile />,

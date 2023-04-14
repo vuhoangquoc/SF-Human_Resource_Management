@@ -11,6 +11,7 @@ import {
   Form,
   Select,
   DatePicker,
+  Avatar,
 } from "antd";
 import {
   EditOutlined,
@@ -18,11 +19,19 @@ import {
   EyeOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import { delUser, getUser } from "../../api/index";
+import { getUser } from "../../api/index";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  deleteUser,
+  toggleVacationMode2,
+} from "../../Redux/Reducer/onSwitchSlice";
 
 const PersonelPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   // State lấy user từ api
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
@@ -32,14 +41,15 @@ const PersonelPage = () => {
   const [editStaff, setEditStaff] = useState(null);
 
   // State thêm nhân sự
-  const [addLastName, setAddLastName] = useState();
-  const [addFirstName, setAddFirstName] = useState();
-  const [addAge, setAddAge] = useState();
-  const [addGender, setAddGender] = useState();
-  const [addEmail, setAddEmail] = useState();
-  const [addPhone, setAddPhone] = useState();
-  const [addCompany, setAddCompany] = useState();
-  const [addBirthDate, setAddBirthDate] = useState();
+  const [addImage, setAddImage] = useState("");
+  const [addLastName, setAddLastName] = useState("");
+  const [addFirstName, setAddFirstName] = useState("");
+  const [addAge, setAddAge] = useState("");
+  const [addGender, setAddGender] = useState("");
+  const [addEmail, setAddEmail] = useState("");
+  const [addPhone, setAddPhone] = useState("");
+  const [addCompany, setAddCompany] = useState("");
+  const [addBirthDate, setAddBirthDate] = useState("");
 
   useEffect(() => {
     setLoading(true);
@@ -75,32 +85,71 @@ const PersonelPage = () => {
   const handlePhoneChange = (e) => {
     setAddPhone(e.target.value);
   };
+  const handleImageChange = (e) => {
+    setAddImage(e.target.value);
+  };
   // End
 
-  // Button chế độ nghỉ phép
-  const ToggleSwitch = ({ checked }) => {
-    const onChange = (checked) => {
-      console.log(`switch to ${checked}`);
+  // Switch chế độ nghỉ phép
+  const VacationModeToggle = ({ id }) => {
+    const dispatch = useDispatch();
+
+    // onSwitch
+    const isVacationModeOn2 = useSelector(
+      (state) => state.vacationMode2[id] ?? false
+    );
+
+    // useEffect(() => {
+    //   localStorage.setItem(
+    //     `vacationMode_${id}`,
+    //     JSON.stringify(isVacationModeOn2)
+    //   );
+    // }, [id, isVacationModeOn2]);
+
+    // onSwitch
+    const handleToggle2 = (checked) => {
+      dispatch(toggleVacationMode2({ id, checked }));
     };
+
     return (
-      <Switch
-        checked={checked}
-        onChange={onChange}
-        checkedChildren="Nghỉ phép"
-        unCheckedChildren="Đang làm"
-      />
+      <div>
+        {/* <label htmlFor={`vacationModeToggle_${id}`}>Vacation Mode:</label> */}
+        <Switch
+          id={`vacationModeToggle_${id}`}
+          checked={isVacationModeOn2}
+          onChange={handleToggle2}
+          checkedChildren="Nghỉ phép"
+          unCheckedChildren="Đang làm"
+        />
+      </div>
     );
   };
-  // End button
+  // End Switch
+
+  // Xử lý bug khi xóa nhân sự đang bật chế độ nghỉ phép
+  // const handleBugStaff = (id) => {
+  //   const getDataRest = localStorage.getItem("vacationMode");
+  //   if (getDataRest) {
+  //     const filteredObject = Object.fromEntries(
+  //       // Sử dụng filter để lọc qua mảng các cặp key-value
+  //       Object.entries(JSON.parse(getDataRest)).filter(([id, value]) => {
+  //         // Chỉ giữ lại các cặp key-value với value là false
+  //         return value === false;
+  //       })
+  //     );
+  //     console.log(filteredObject);
+  //     // localStorage.setItem("vacationMode", JSON.stringify(filteredObject));
+  //   }
+  // };
 
   const columns = [
-    // {
-    //   title: "Ảnh",
-    //   dataIndex: "image",
-    //   render: (link) => {
-    //     return <Avatar src={link} />;
-    //   },
-    // },
+    {
+      title: "Ảnh",
+      dataIndex: "image",
+      render: (link) => {
+        return <Avatar src={link} />;
+      },
+    },
     {
       title: "Họ",
       dataIndex: "lastName",
@@ -153,6 +202,32 @@ const PersonelPage = () => {
       title: "Phòng ban",
       dataIndex: "company",
       render: (item) => item.department,
+      filterDropdown: ({ setSelectedKeys, selectedKeys, confirm }) => {
+        return (
+          <Input
+            autoFocus
+            placeholder="Nhập phòng ban..."
+            value={selectedKeys[0]}
+            onChange={(e) => {
+              setSelectedKeys(e.target.value ? [e.target.value] : []);
+            }}
+            onPressEnter={() => {
+              confirm();
+            }}
+            onBlur={() => {
+              confirm();
+            }}
+          ></Input>
+        );
+      },
+      filterIcon: () => {
+        return <SearchOutlined />;
+      },
+      onFilter: (value, record) => {
+        return record.company.department
+          .toLowerCase()
+          .includes(value.toLowerCase());
+      },
     },
     {
       title: "Ngày sinh",
@@ -177,10 +252,17 @@ const PersonelPage = () => {
             />
             <DeleteOutlined
               onClick={() => {
+                // let va = JSON.parse(localStorage.getItem("vacationMode"));
+                // console.log(typeof va);
+                // Reflect.deleteProperty(va, record.id);
+
+                // console.log(va);
+                // localStorage.setItem("vacationMode", JSON.stringify(va));
+                // dispatch(deleteUser(record.id));
                 handleDeleteStaff(record);
+                // handleBugStaff(record.id);
                 setLoading(true);
-                delUser(record.id);
-                console.log(record);
+                // delUser(record.id);
               }}
               style={{ color: "red" }}
             />
@@ -193,7 +275,7 @@ const PersonelPage = () => {
       render: (record) => {
         return (
           <>
-            <ToggleSwitch />
+            <VacationModeToggle id={record.id} />
           </>
         );
       },
@@ -204,8 +286,8 @@ const PersonelPage = () => {
   const addStaff = () => {
     const randomNumber = parseInt(Math.random() * 1000);
     const newStaff = {
-      id: randomNumber,
-      // image: <Avatar size="default" icon={<UserAddOutlined />}></Avatar>,
+      id: dataSource.length + 1,
+      image: addImage,
       lastName: addLastName,
       firstName: addFirstName,
       age: addAge,
@@ -223,6 +305,15 @@ const PersonelPage = () => {
       "usersData",
       JSON.stringify([...dataSource, newStaff])
     );
+    setAddImage("");
+    setAddLastName("");
+    setAddFirstName("");
+    setAddAge("");
+    setAddGender("");
+    setAddEmail("");
+    setAddPhone("");
+    setAddCompany("");
+    setAddBirthDate("");
   };
   // End thêm nhân sự
 
@@ -283,6 +374,22 @@ const PersonelPage = () => {
   };
   // End Model thêm nhân sự
 
+  const [options, setOptions] = useState([]); // State để lưu các tùy chọn của thẻ Select
+
+  useEffect(() => {
+    // Lấy dữ liệu từ localStorage
+    const getDepartmentData = localStorage.getItem("departmentData"); // Thay 'key' bằng key của dữ liệu trong localStorage của bạn
+    const parsedData = JSON.parse(getDepartmentData); // Chuyển đổi dữ liệu từ chuỗi sang đối tượng
+    console.log(parsedData);
+    // Cập nhật state với các tùy chọn đã lọc
+    setOptions(
+      parsedData.map((item) => ({
+        value: item.departmentName,
+        label: item.departmentName,
+      }))
+    );
+  }, []); // Chạy useEffect một lần duy nhất khi component được mount
+
   return (
     <div>
       <Space size={20} direction="vertical">
@@ -293,7 +400,7 @@ const PersonelPage = () => {
           loading={loading}
           columns={columns}
           dataSource={dataSource}
-          pagination={{ pageSize: 7 }}
+          pagination={{ pageSize: 6 }}
         ></Table>
       </Space>
 
@@ -306,21 +413,32 @@ const PersonelPage = () => {
         onCancel={handleCancel}
       >
         <Form>
-          <Form.Item label="Họ">
+          <Form.Item>
+            <label htmlFor="">Ảnh</label>
+            <Input
+              value={addImage}
+              onChange={handleImageChange}
+              placeholder="Ảnh"
+            />
+          </Form.Item>
+          <Form.Item>
+            <label htmlFor="">Họ:</label>
             <Input
               value={addLastName}
               onChange={handleLastNameChange}
               placeholder="Họ"
             />
           </Form.Item>
-          <Form.Item label="Tên">
+          <Form.Item>
+            <label htmlFor="">Tên:</label>
             <Input
               value={addFirstName}
               onChange={handleFirstNameChange}
               placeholder="Tên"
             />
           </Form.Item>
-          <Form.Item label="Tuổi">
+          <Form.Item>
+            <label htmlFor="">Tuổi:</label>
             <Input
               type="number"
               value={addAge}
@@ -341,7 +459,6 @@ const PersonelPage = () => {
           </Form.Item>
           <Form.Item
             name="email"
-            label="E-mail"
             value={addEmail}
             onChange={handleEmailChange}
             rules={[
@@ -355,9 +472,11 @@ const PersonelPage = () => {
               },
             ]}
           >
+            <label htmlFor="">Email:</label>
             <Input />
           </Form.Item>
-          <Form.Item label="SDT">
+          <Form.Item>
+            <label htmlFor="">SDT:</label>
             <Input
               type="number"
               value={addPhone}
@@ -368,31 +487,33 @@ const PersonelPage = () => {
           <Form.Item label="Phòng ban">
             <Space wrap>
               <Select
-                defaultValue="IT"
+                // defaultValue="IT"
                 style={{
                   width: 120,
                 }}
+                value={addCompany}
                 onChange={(value) => {
                   setAddCompany(value);
                 }}
-                options={[
-                  {
-                    value: "IT",
-                    label: "IT",
-                  },
-                  {
-                    value: "Support",
-                    label: "Support",
-                  },
-                  {
-                    value: "Services",
-                    label: "Services",
-                  },
-                  {
-                    value: "Marketing",
-                    label: "Marketing",
-                  },
-                ]}
+                options={options}
+                // options={[
+                //   {
+                //     value: "IT",
+                //     label: "IT",
+                //   },
+                //   {
+                //     value: "Support",
+                //     label: "Support",
+                //   },
+                //   {
+                //     value: "Services",
+                //     label: "Services",
+                //   },
+                //   {
+                //     value: "Marketing",
+                //     label: "Marketing",
+                //   },
+                // ]}
               />
             </Space>
           </Form.Item>
@@ -433,7 +554,20 @@ const PersonelPage = () => {
         {/* <span style={{ fontWeight: "bold" }}>Ảnh</span>
         <Input value={editStaff?.image} /> */}
         <Form>
-          <Form.Item label="Họ">
+          <Form.Item>
+            <label htmlFor="">Ảnh</label>
+            <Input
+              value={editStaff?.image}
+              onChange={(e) => {
+                setEditStaff((pre) => {
+                  return { ...pre, image: e.target.value };
+                });
+              }}
+              placeholder="Ảnh"
+            />
+          </Form.Item>
+          <Form.Item>
+            <label htmlFor="">Họ:</label>
             <Input
               value={editStaff?.lastName}
               onChange={(e) => {
@@ -445,7 +579,8 @@ const PersonelPage = () => {
             />
           </Form.Item>
         </Form>
-        <Form.Item label="Tên">
+        <Form.Item>
+          <label htmlFor="">Tên:</label>
           <Input
             value={editStaff?.firstName}
             onChange={(e) => {
@@ -456,7 +591,8 @@ const PersonelPage = () => {
             placeholder="Tên"
           />
         </Form.Item>
-        <Form.Item label="Tuổi">
+        <Form.Item>
+          <label htmlFor="">Tuổi</label>
           <Input
             type="number"
             value={editStaff?.age}
@@ -481,7 +617,8 @@ const PersonelPage = () => {
             <Radio value={"Nữ"}>Nữ</Radio>
           </Radio.Group>
         </Form.Item>
-        <Form.Item label="Email">
+        <Form.Item>
+          <label htmlFor="">Email</label>
           <Input
             value={editStaff?.email}
             onChange={(e) => {
@@ -491,7 +628,8 @@ const PersonelPage = () => {
             }}
           />
         </Form.Item>
-        <Form.Item label="SDT">
+        <Form.Item>
+          <label htmlFor="">SDT</label>
           <Input
             type="number"
             value={editStaff?.phone}
@@ -506,7 +644,7 @@ const PersonelPage = () => {
         <Form.Item label="Phòng ban">
           <Space wrap>
             <Select
-              defaultValue="IT"
+              // defaultValue="IT"
               style={{
                 width: 120,
               }}
@@ -516,24 +654,25 @@ const PersonelPage = () => {
                   return { ...pre, company: { department: value } };
                 });
               }}
-              options={[
-                {
-                  value: "IT",
-                  label: "IT",
-                },
-                {
-                  value: "Support",
-                  label: "Support",
-                },
-                {
-                  value: "Services",
-                  label: "Services",
-                },
-                {
-                  value: "Marketing",
-                  label: "Marketing",
-                },
-              ]}
+              options={options}
+              // options={[
+              //   {
+              //     value: "IT",
+              //     label: "IT",
+              //   },
+              //   {
+              //     value: "Support",
+              //     label: "Support",
+              //   },
+              //   {
+              //     value: "Services",
+              //     label: "Services",
+              //   },
+              //   {
+              //     value: "Marketing",
+              //     label: "Marketing",
+              //   },
+              // ]}
             />
           </Space>
         </Form.Item>
