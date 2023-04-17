@@ -7,6 +7,7 @@ import {
   GiftOutlined,
   ContactsOutlined,
   HomeOutlined,
+  UsergroupAddOutlined,
 } from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -44,6 +45,11 @@ const Sidebar = () => {
             key: "/department",
             icon: <BorderOuterOutlined />,
             label: "Phòng ban",
+          },
+          {
+            key: "/adduser",
+            icon: <UsergroupAddOutlined />,
+            label: "Người dùng",
           },
           {
             key: "/position",
