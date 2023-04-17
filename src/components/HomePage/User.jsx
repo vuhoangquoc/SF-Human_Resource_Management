@@ -38,6 +38,22 @@ const User = () => {
               </Link>
             ),
           },
+          {
+            key: "3",
+            label: (
+              <Link to="/Password">
+                <div>Đổi mật Khẩu</div>
+              </Link>
+            ),
+          },
+          {
+            key: "3",
+            label: (
+              <Link to="/signin">
+                <div>Đăng xuất</div>
+              </Link>
+            ),
+          },
         ]
       : items2;
 
