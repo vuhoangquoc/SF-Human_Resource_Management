@@ -6,11 +6,8 @@ import UserProfile from "./pages/UserProfile/UserProfile";
 import SignupPage from "./pages/SignPage/SignupPage";
 import SigninPage from "./pages/SignPage/SigninPage";
 import PartitivePage from "./components/Partitiva";
-<<<<<<< HEAD
 import PasswordUpdatePage from "./pages/SignPage/PasswordUpdatePage.jsx";
-=======
 import As from "./position-management";
->>>>>>> 4e8176409c94991218e3f332dffc7c4e0e2260b1
 
 const router = createBrowserRouter([
   {
