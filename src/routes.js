@@ -2,12 +2,11 @@ import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import HomePage from "./pages/HomePage/HomePage";
 import PersonelPage from "./pages/PersonelRecord/PersonelPage";
-import LoginPages from "./pages/SignPage/SigninPage";
 import UserProfile from "./pages/UserProfile/UserProfile";
-import SignUpPage from "./pages/SignPage/SignupPage";
 import SignupPage from "./pages/SignPage/SignupPage";
 import SigninPage from "./pages/SignPage/SigninPage";
 import PartitivePage from "./components/Partitiva";
+import PasswordUpdatePage from "./pages/SignPage/PasswordUpdatePage.jsx";
 import As from "./position-management";
 
 const router = createBrowserRouter([
@@ -37,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: "/Partitive",
     element: <PartitivePage />,
+  },
+  {
+    path: "/Password",
+    element: <PasswordUpdatePage />,
   },
 ]);
 
