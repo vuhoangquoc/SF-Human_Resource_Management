@@ -24,3 +24,35 @@ export const PartitiveData = [
     status: "",
   },
 ];
+export const PresentData = [
+  {
+    id: 1,
+    username:"Nguyễn Văn A",
+    departmentId: "DG123",
+    departmentName: "Markerting ",
+    format:"khen thưởng",
+    content:"Hoàn thành tốt nhiệm vụ được giao",
+    time:"6/36/2024",
+
+  },
+  {
+    id: 2,
+    username:"Nguyễn Văn A",
+    departmentId: "DG123",
+    departmentName: "Markerting ",
+    format: "kỉ luật",
+    content:"chậm trễ dự án ",
+    time:"4/18/2024",
+
+  },
+  {
+    id: 3,
+    username:"Nguyễn Văn A",
+    departmentId: "DG123",
+    departmentName: "Markerting ",
+    format: "khen thưởng ",
+    content:"vượt chỉ tiêu",
+    time:"5/24/2024",
+
+  }
+];

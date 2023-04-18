@@ -6,6 +6,7 @@ import { PartitiveData } from "../../dummyDate";
 const Partitive = () => {
   const [data, setData] = useState();
   const [inputValue, setInputValue] = useState("");
+  
   const [selectedRow, setSelectedRow] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [departmentNameInput, setDepartmentName] = useState("");
