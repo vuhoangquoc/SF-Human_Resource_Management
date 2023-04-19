@@ -160,7 +160,7 @@ return (
       </Space>
       <Table 
         columns={[
-          { title: "STT", key:"index", render: (text,record,index)=> index+1},
+          // { title: "STT", key:"index", render: (text,record,index)=> index+1},
           { title: "Họ & Tên ", dataIndex: "username", key: "username"},
           { title: "Mã bộ phận", dataIndex: "departmentId",  key: "departmentId"},
           { title: "Tên bộ phận", dataIndex: "departmentName", key: "departmentName"},

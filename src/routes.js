@@ -10,6 +10,7 @@ import PasswordUpdatePage from "./pages/SignPage/PasswordUpdatePage.jsx";
 import As from "./position-management";
 import PresentPage from "./pages/PresentPage/PresentPage";
 import PositionPage from "./pages/PositionPage/PositivePage";
+import ContractPage from "./pages/ContractPage/ContractPage";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,8 @@ const router = createBrowserRouter([
       // { path: "/position", element: <As /> },
       { path: "/position", element: <PositionPage /> },
       { path: "/present", element: <PresentPage/> },
-      { path: "/profile/:userId", element: <UserProfile />, },
+      { path: "/contract", element: <ContractPage/> },
+      { path: "/profile/:userId", element: <UserProfile /> },
     ],
   },
   {

@@ -172,7 +172,7 @@ const Position = () => {
 
       <Table 
         columns={[
-          { title: "STT", key:"index", render: (text,record,index)=> index+1},
+          // { title: "STT", key:"index", render: (text,record,index)=> index+1},
           { title: "Họ & Tên ", dataIndex: "username", key: "username"},
           { title: "Giới tính ", dataIndex: "gender", key: "gender"},
           { title: "Tuổi ", dataIndex: "age", key: "age"},

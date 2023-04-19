@@ -96,10 +96,11 @@ export const ContractData = [
     contractNumber: "HD-001",
     customerName: "Nguyễn Thị B",
     customerId: "KH-001",
+    product: "Máy in",
     quantity: 2,
     totalAmount: 30000000,
     paymentMethod: "Trả trước",
-    status: "Hoàn thành",
+    status: "",
     contractDate: "2022-05-01",
   },
   {
@@ -107,10 +108,11 @@ export const ContractData = [
     contractNumber: "HD-002",
     customerName: "Trần Văn C",
     customerId: "KH-002",
+    product: "Máy in",
     quantity: 1,
     totalAmount: 8000000,
     paymentMethod: "Trả sau",
-    status: "Đang thực hiện",
+    status: "",
     contractDate: "2022-06-15",
   },
   {
@@ -118,10 +120,11 @@ export const ContractData = [
     contractNumber: "HD-003",
     customerName: "Lê Thị D",
     customerId: "KH-003",
+    product: "Máy in",
     quantity: 3,
     totalAmount: 15000000,
     paymentMethod: "Trả trước",
-    status: "Chưa thực hiện",
+    status: "",
     contractDate: "2022-07-10",
   }
 ];

@@ -51,7 +51,7 @@ const PasswordUpdate = () => {
     if (err) toast.error(err.message);
     if (response) {
       form.resetForm();
-      navigate("/");
+      navigate("/signin");
       dispatch(setUser(null));
       dispatch(setAuthModalOpen(true));
       toast.success("Cập nhật mật khẩu thành công! Vui lòng đăng nhập lại");
