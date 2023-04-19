@@ -125,8 +125,8 @@ const Partitive = () => {
         columns={[
           {
             title: "STT",
-            dataIndex: "id",
-            key: "id",
+            key: "id", 
+            render: (text,record,index)=> index+1
           },
           {
             title: "Mã bộ phận",
