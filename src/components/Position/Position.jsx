@@ -1,66 +1,68 @@
-import React, { useEffect, useState }  from 'react'
-import {  Space, Table, Input, Button, Popconfirm, Form,Modal  } from "antd";
+import React, { useEffect, useState } from 'react'
+import {  Space, Table, Input, Button, Form, Modal, Popconfirm } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { PresentData} from "../../dummyDate"
-const Present = () => {
-
+import { PositionData } from '../../dummyDate';
+const Position = () => {
   const [data, setData] = useState();
+
   const [departmentName, setDepartmentName] = useState("");
+  const [gender, setGender] = useState("");
+  const [age, setAge] = useState("");
   const [username, setUsername] = useState("");
-  const [format, setFormat] = useState("");
-  const [content, setContent] = useState("");
-  
+  const [position, setPosition] = useState("");
 
   const [selectedRow, setSelectedRow] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [departmentIdInput, setDepartmentId] = useState("");
 
-
-// lấy data từ api    
+  // lấy data từ api    
   useEffect(() => {
-    const departmentPresentData = JSON.parse (localStorage.getItem("departmentPresentData"));
-    if (departmentPresentData && departmentPresentData.length !== 0) {
-      setData(departmentPresentData);
+    const departmentPostitionData = JSON.parse (localStorage.getItem("departmentPostitionData"));
+    if (departmentPostitionData && departmentPostitionData.length !== 0) {
+      setData(departmentPostitionData);
     } else {
-      setData(PresentData);
-      localStorage.setItem("departmentPresentData", JSON.stringify(PresentData));
+      setData(PositionData);
+      localStorage.setItem("departmentPostitionData", JSON.stringify(PositionData));
     }
   }, []);
-
-  //thêm data vào 
   const handleAdd = (record, values) => {
     const newItem = {
       id: data.length + 1,
       username:username,
+      gender: gender,
+      age: age,
       departmentId: "SF" + Math.floor(Math.random() * 1000),
       departmentName: departmentName,
-      format:format,
-      content: content,
-      time:new Date().toISOString(),
+      position: position,
       status: "",
     };
     setData([...data, newItem]);
-    localStorage.setItem("departmentPresentData", JSON.stringify([...data, newItem]));
+    localStorage.setItem("departmentPostitionData", JSON.stringify([...data, newItem]));
     setUsername("");
+    setGender ("");
+    setAge ("");
     setDepartmentName("");
-    setFormat("");
-    setContent("");
+    setPosition ("");
   };
 
   const handleInputUsername = (event) => {
     setUsername(event.target.value); 
   };
 
+  const handleInputGender = (event) => {
+    setGender(event.target.value); 
+  };
+
+  const handleInputAge = (event) => {
+    setAge(event.target.value);
+  };
+
   const handleInputDepartmentName = (event) => {
     setDepartmentName(event.target.value);
   };
 
-  const handleInputFormat = (event) => {
-    setFormat(event.target.value);
-  };
-
-  const handleInputContent = (event) => {
-    setContent(event.target.value);
+  const handleInputPosition = (event) => {
+    setPosition(event.target.value);
   };
   //thêm data vào
   
@@ -68,10 +70,11 @@ const Present = () => {
   const handleEdit = (record) => {
     setSelectedRow(record);
     setUsername(record.username);
+    setGender(record.gender);
+    setAge(record.age);
     setDepartmentName(record.departmentName);
     setDepartmentId(record.departmentId);
-    setFormat(record.format);
-    setContent(record.content);
+    setPosition(record.position);
     setModalVisible(true);
   };
   const handleSave = () => {
@@ -80,54 +83,58 @@ const Present = () => {
         return {
           ...item,
           username: username,
+          gender:gender,
+          age: age,
           departmentName: departmentName,
           departmentId: departmentIdInput,
-          departmentId: departmentIdInput,
-          format: format,
-          content: content,
+          position: position,
         };
       } else {
         return item;
       }
     });
     setData(updatedData);
-    localStorage.setItem("departmentPresentData", JSON.stringify(updatedData));
+    localStorage.setItem("departmentPostitionData", JSON.stringify(updatedData));
     setSelectedRow(null);
     setModalVisible(false);
     setUsername("");
+    setGender("");
+    setAge("");
     setDepartmentName("");
-    setDepartmentId("");setFormat("");
-    setContent("");
+    setDepartmentId("");
+    setPosition("");
   };
 
   const handleCancel = () => {
     setSelectedRow(null);
     setModalVisible(false);
-    setUsername("");;
+    setUsername("");
+    setGender("");
+    setAge("");
     setDepartmentName("");
     setDepartmentId("");
-    setFormat("");
-    setContent("");
+    setPosition("");
   };
   // xóa data
   const handleDelete = (record) => {
     const newData = data.filter((item) => item.id !== record.id);
     setData(newData);
-    localStorage.setItem("departmentPresentData", JSON.stringify(newData));
+    localStorage.setItem("departmentPostitionData", JSON.stringify(newData));
   };
-
-return (
+  return (
     <div>
       <Space size={20} direction="vertical">
-      {/* thêm */}
-      <Space size="middle">
+       {/* thêm */}
+       <Space size="middle">
         <Input value={username} onChange={handleInputUsername} placeholder="Họ & Tên"/>
-        <Input value={departmentName} onChange={handleInputDepartmentName} placeholder="Nhập tên phòng ban"/>
-        <Input value={format} onChange={handleInputFormat} placeholder="Hình thức" />
-        <Input value={content} onChange={ handleInputContent} placeholder="Thông tin"/>
+        <Input value={gender} onChange={handleInputGender} placeholder="Giới tính "/>
+        <Input value={age} onChange={handleInputAge} placeholder="Tuổi" />
+        <Input value={departmentName} onChange={handleInputDepartmentName} placeholder=" Tên phòng ban"/>
+        <Input value={position} onChange={ handleInputPosition} placeholder="Chức Vụ"/>
       </Space>
       <Button type="primary" onClick={handleAdd}>Thêm</Button>
-     {/* sửa */}
+
+      {/* sửa */}
      <Space>
         <Modal title="Sửa" visible={modalVisible} onOk={handleSave} onCancel={handleCancel} >
           {selectedRow && (
@@ -138,6 +145,14 @@ return (
                   <Input placeholder="Họ & Tên" value={username} onChange={(e) => setUsername(e.target.value)} />
                 </Form.Item>
                 <Form.Item>
+                  <label htmlFor="">Giới tính </label>
+                  <Input placeholder="Giới tính" value={gender} onChange={(e) => setGender(e.target.value)} />
+                </Form.Item>
+                <Form.Item>
+                  <label htmlFor="">Tuổi </label>
+                  <Input placeholder="Tuổi" value={age} onChange={(e) => setAge(e.target.value)} />
+                </Form.Item>
+                <Form.Item>
                   <label htmlFor="">Mã Phòng Ban </label>
                   <Input placeholder="Mã phòng ban" value={departmentIdInput} onChange={(e) => setDepartmentId(e.target.value)}/>
                 </Form.Item>
@@ -146,27 +161,24 @@ return (
                   <Input placeholder="Tên bộ phận " value={departmentName} onChange={(e) => setDepartmentName(e.target.value)}/>
                 </Form.Item>
                 <Form.Item>
-                  <label htmlFor="">HÌnh Thức </label>
-                  <Input placeholder="Hình thức" value={format} onChange={(e) => setFormat(e.target.value)} />
-                </Form.Item>
-                <Form.Item>
-                  <label htmlFor="">Thông tin  </label>
-                  <Input placeholder="Thông tin" value={content} onChange={(e) => setContent(e.target.value)} />
+                  <label htmlFor="">Chức vụ  </label>
+                  <Input placeholder="Chức vụ" value={position} onChange={(e) => setPosition(e.target.value)} />
                 </Form.Item>
               </Form>
             </div>
           )}
         </Modal>
       </Space>
+
       <Table 
         columns={[
           { title: "STT", key:"index", render: (text,record,index)=> index+1},
           { title: "Họ & Tên ", dataIndex: "username", key: "username"},
+          { title: "Giới tính ", dataIndex: "gender", key: "gender"},
+          { title: "Tuổi ", dataIndex: "age", key: "age"},
           { title: "Mã bộ phận", dataIndex: "departmentId",  key: "departmentId"},
           { title: "Tên bộ phận", dataIndex: "departmentName", key: "departmentName"},
-          { title: "Hình thức", dataIndex: "format", key: "format" },
-          { title: "Thông tin",  dataIndex: "content", key: "content" },
-          { title: "thời gian", dataIndex: "time", key: "time"},
+          { title: "Chức vụ", dataIndex: "position", key: "postion" },
           { title: "Hoạt động", dataIndex: "status", key: "action",
             render: (text, record) => (
               <Space size="middle">
@@ -183,16 +195,17 @@ return (
                 </Popconfirm>
               </Space>
             ),
-          },
+          }
+          
         ]}
         dataSource={data}
         pagination={{
           pageSize: 5
         }}
-        />
-        </Space>
+      />
+      </Space>
     </div>
-    )
+  )
 }
 
-export default Present;
+export default Position;

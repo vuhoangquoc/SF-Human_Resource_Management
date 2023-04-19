@@ -9,6 +9,7 @@ import PartitivePage from "./components/Partitiva";
 import PasswordUpdatePage from "./pages/SignPage/PasswordUpdatePage.jsx";
 import As from "./position-management";
 import PresentPage from "./pages/PresentPage/PresentPage";
+import PositionPage from "./pages/PositionPage/PositivePage";
 
 const router = createBrowserRouter([
   {
@@ -19,15 +20,10 @@ const router = createBrowserRouter([
       { path: "/home", element: <HomePage /> },
       { path: "/personel", element: <PersonelPage /> },
       { path: "/department", element: <PartitivePage /> },
-      { path: "/position", element: <As /> },
-      {
-        path: "/present",
-        element: <PresentPage/>,
-      },
-      {
-        path: "/profile/:userId",
-        element: <UserProfile />,
-      },
+      // { path: "/position", element: <As /> },
+      { path: "/position", element: <PositionPage /> },
+      { path: "/present", element: <PresentPage/> },
+      { path: "/profile/:userId", element: <UserProfile />, },
     ],
   },
   {
@@ -37,10 +33,6 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignupPage />,
-  },
-  {
-    path: "/Partitive",
-    element: <PartitivePage />,
   },
   {
     path: "/Password",
