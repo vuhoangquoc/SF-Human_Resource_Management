@@ -85,7 +85,9 @@ const Partitive = () => {
           onChange={handleInputChange}
           placeholder="Nhập tên phòng ban"
         />
-        <Button onClick={handleAdd}>Thêm</Button>
+        <Button type="primary" onClick={handleAdd}>
+          Thêm
+        </Button>
       </Space>
 
       <Space>
