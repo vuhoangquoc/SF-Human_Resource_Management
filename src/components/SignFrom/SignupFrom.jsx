@@ -75,7 +75,7 @@ const SignupForm = () => {
           value={signinForm.values.username}
           onChange={signinForm.handleChange}
           type="text"
-          placeholder="Họ & Tên"
+          placeholder="Tên tài khoản"
           name="username"
           fullWidth
           color="success"
@@ -92,7 +92,7 @@ const SignupForm = () => {
         />
         <TextField
           type="text"
-          placeholder="Tên hiển thị "
+          placeholder="Tên  "
           name="displayName"
           fullWidth
           value={signinForm.values.displayName}

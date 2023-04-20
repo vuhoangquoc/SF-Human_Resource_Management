@@ -51,7 +51,7 @@ const PasswordUpdate = () => {
     if (err) toast.error(err.message);
     if (response) {
       form.resetForm();
-      navigate("/signin");
+      navigate("/");
       dispatch(setUser(null));
       dispatch(setAuthModalOpen(true));
       toast.success("Cập nhật mật khẩu thành công! Vui lòng đăng nhập lại");
@@ -76,7 +76,7 @@ const PasswordUpdate = () => {
             />
             <TextField
               type="password"
-              placeholder="Mật Khẩu Mới "
+              placeholder="Mật khẩu mới "
               name="newPassword"
               fullWidth
               value={form.values.newPassword}
@@ -87,7 +87,7 @@ const PasswordUpdate = () => {
             />
             <TextField
               type="password"
-              placeholder="xác Nhận Mật Khẩu Mới"
+              placeholder="Xác nhận mật khẩu mới"
               name="confirmNewPassword"
               fullWidth
               value={form.values.confirmNewPassword}

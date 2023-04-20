@@ -82,7 +82,6 @@ const Present = () => {
           username: username,
           departmentName: departmentName,
           departmentId: departmentIdInput,
-          departmentId: departmentIdInput,
           format: format,
           content: content,
         };
