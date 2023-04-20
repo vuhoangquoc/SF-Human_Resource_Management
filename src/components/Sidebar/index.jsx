@@ -57,7 +57,7 @@ const Sidebar = () => {
             label: "Chức vụ",
           },
           {
-            key: "/reward",
+            key: "/present",
             icon: <GiftOutlined />,
             label: "Khen thưởng và kỉ luật",
           },

@@ -57,13 +57,15 @@ const SigninForm = () => {
     if (!response.err) {
       navigate("/");
     }
-  }
+  };
 
   return (
     <div>
-      <Box component="form" onSubmit={signinForm.handleSubmit} >
-        <Stack spacing={3} >
-          <TextField value={signinForm.values.username} onChange={signinForm.handleChange}
+      <Box component="form" onSubmit={signinForm.handleSubmit}>
+        <Stack spacing={3}>
+          <TextField
+            value={signinForm.values.username}
+            onChange={signinForm.handleChange}
             type="text"
             placeholder="Họ & Tên"
             name="username"
@@ -111,26 +113,22 @@ const SigninForm = () => {
           fullWidth
           size="large"
           variant="contained"
-
           loading={isLoginRequest}
           onClick={handleButtionClickSignin}
         >
           Đăng Nhập
         </Button>
 
-        <Button
-          size="large"
-          fullWidth
-          sx={{ marginTop: 3 }}
-        >
-        <Link to ="/Signup" style={{color: "white"}}>Đăng Ký </Link>
-
+        <Button size="large" fullWidth sx={{ marginTop: 3 }}>
+          <Link to="/Signup" style={{ color: "white" }}>
+            Đăng Ký{" "}
+          </Link>
         </Button>
 
         {errorMessage && (
           <Box sx={{ marginTop: 2 }}>
-          <Alert variant="filled" severity="error">
-                đăng nhập thất bại  
+            <Alert variant="filled" severity="error">
+              đăng nhập thất bại
             </Alert>
           </Box>
         )}

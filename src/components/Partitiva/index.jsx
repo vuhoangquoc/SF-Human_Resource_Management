@@ -6,6 +6,7 @@ import { PartitiveData } from "../../dummyDate";
 const Partitive = () => {
   const [data, setData] = useState();
   const [inputValue, setInputValue] = useState("");
+
   const [selectedRow, setSelectedRow] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [departmentNameInput, setDepartmentName] = useState("");
@@ -22,13 +23,16 @@ const Partitive = () => {
   }, []);
 
   const handleAdd = (record, values) => {
+    const randomNumber = parseInt(Math.random() * 1000);
     const newItem = {
-      id: data.length + 1,
+      id: randomNumber,
       departmentId: "SF" + Math.floor(Math.random() * 1000),
       departmentName: inputValue,
       status: "",
     };
-    setData([...data, newItem]);
+    setData(() => {
+      return [...data, newItem];
+    });
     localStorage.setItem("departmentData", JSON.stringify([...data, newItem]));
     setInputValue("");
   };
@@ -124,11 +128,11 @@ const Partitive = () => {
 
       <Table
         columns={[
-          {
-            title: "STT",
-            dataIndex: "id",
-            key: "id",
-          },
+          // {
+          //   title: "STT",
+          //   dataIndex: "id",
+          //   key: "id",
+          // },
           {
             title: "Mã bộ phận",
             dataIndex: "departmentId",

@@ -286,7 +286,8 @@ const PersonelPage = () => {
   const addStaff = () => {
     const randomNumber = parseInt(Math.random() * 1000);
     const newStaff = {
-      id: dataSource.length + 1,
+      // id: dataSource.length + 1,
+      id: randomNumber,
       image: addImage,
       lastName: addLastName,
       firstName: addFirstName,

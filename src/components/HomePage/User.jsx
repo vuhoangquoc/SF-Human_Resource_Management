@@ -38,24 +38,38 @@ const User = () => {
               </Link>
             ),
           },
+          {
+            key: "3",
+            label: (
+              <Link to="/Password">
+                <div>Đổi mật Khẩu</div>
+              </Link>
+            ),
+          },
+          {
+            key: "3",
+            label: (
+              <Link to="/signin">
+                <div>Đăng xuất</div>
+              </Link>
+            ),
+          },
         ]
       : items2;
 
   return (
     <div style={{ cursor: "pointer" }}>
       <Dropdown menu={{ items }}>
-        {/* <a onClick={(e) => e.preventDefault()}> */}
-
         <Space>
           <Avatar
             size="default"
             icon={<UserAddOutlined />}
-            src={user.image || ""}
+            // src={user.image || ""}
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8t4tE4MIKosJILqAvmB-hg3ognAutIw01UQ&usqp=CAU"
           ></Avatar>
-          <span>{user.name || "Người dùng"}</span>
+          <span>{user.name || "Admin"}</span>
           <DownOutlined />
         </Space>
-        {/* </a> */}
       </Dropdown>
     </div>
   );
