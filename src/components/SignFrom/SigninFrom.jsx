@@ -19,16 +19,16 @@ const SigninForm = () => {
 
   const signinForm = useFormik({
     initialValues: {
-      password: "",
       username: "",
+      password: "",
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .min(8, "tên người dùng tối thiểu 8 ký tự")
-        .required("tên người dùng là bắt buộc"),
+        .min(8, "Tên người dùng tối thiểu 8 ký tự")
+        .required("Tên người dùng là bắt buộc"),
       password: Yup.string()
-        .min(8, "mật khẩu tối thiểu 8 ký tự")
-        .required("mật khẩu là bắt buộc"),
+        .min(8, "Mật khẩu tối thiểu 8 ký tự")
+        .required("Mật khẩu là bắt buộc"),
     }),
     onSubmit: async (values) => {
       setErrorMessage(undefined);
@@ -38,26 +38,28 @@ const SigninForm = () => {
       setIsLoginRequest(false);
 
       if (response) {
-        signinForm.resetForm();
+        // signinForm.resetForm();
         dispatch(setUser(response));
         dispatch(setAuthModalOpen(false));
-        toast.success("Đăng nhập thành công");
+        toast("Đăng nhập thành công", { type: "success" });
+        setTimeout(() => {
+          navigate("/");
+        });
       }
 
       if (err) setErrorMessage(err.message);
     },
   });
 
-  const handleButtionClickSignin = async () => {
-    const response = await userApi.signin({
-      username: signinForm.values.username,
-      password: signinForm.values.password,
-    });
-    console.log("hhh", response);
-    if (!response.err) {
-      navigate("/");
-    }
-  };
+  // const handleButtionClickSignin = async () => {
+  //   const response = await userApi.signin({
+  //     username: signinForm.values.username,
+  //     password: signinForm.values.password,
+  //   });
+  //   console.log("hhh", response);
+  //   if (!response.err) {
+  //   }
+  // };
 
   return (
     <div>
@@ -67,7 +69,7 @@ const SigninForm = () => {
             value={signinForm.values.username}
             onChange={signinForm.handleChange}
             type="text"
-            placeholder="Họ & Tên"
+            placeholder="Tên tài khoản"
             name="username"
             fullWidth
             color="success"
@@ -114,7 +116,7 @@ const SigninForm = () => {
           size="large"
           variant="contained"
           loading={isLoginRequest}
-          onClick={handleButtionClickSignin}
+          // onClick={handleButtionClickSignin}
         >
           Đăng Nhập
         </Button>
@@ -128,7 +130,7 @@ const SigninForm = () => {
         {errorMessage && (
           <Box sx={{ marginTop: 2 }}>
             <Alert variant="filled" severity="error">
-              đăng nhập thất bại
+              Đăng nhập thất bại
             </Alert>
           </Box>
         )}

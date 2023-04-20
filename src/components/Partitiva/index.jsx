@@ -128,6 +128,11 @@ const Partitive = () => {
 
       <Table
         columns={[
+          {
+            title: "STT",
+            key: "id",
+            render: (text, record, index) => index + 1,
+          },
           // {
           //   title: "STT",
           //   dataIndex: "id",

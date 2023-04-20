@@ -1,8 +1,9 @@
 import React from "react";
 import { UserAddOutlined, DownOutlined } from "@ant-design/icons";
-import { Avatar, Dropdown, Space } from "antd";
-import { Link } from "react-router-dom";
+import { Avatar, Button, Dropdown, Space } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 const User = () => {
+  const navigate = useNavigate();
   const user = {
     // name: "Vũ Hoàng",
     // image: "https://avatars.githubusercontent.com/u/103670048?v=4",
@@ -47,11 +48,16 @@ const User = () => {
             ),
           },
           {
-            key: "3",
+            key: "4",
             label: (
-              <Link to="/signin">
-                <div>Đăng xuất</div>
-              </Link>
+              <Button
+                onClick={() => {
+                  localStorage.removeItem("isLoggedIn");
+                  navigate("/signin");
+                }}
+              >
+                Đăng xuất
+              </Button>
             ),
           },
         ]

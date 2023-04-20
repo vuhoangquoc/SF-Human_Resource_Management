@@ -13,7 +13,7 @@ export const userSlice = createSlice({
       } else {
         if (action.payload.token) {
           localStorage.setItem("actkn", action.payload.token);
-          localStorage.setItem("isLoggedIn", true);
+          localStorage.setItem("isLoggedIn", "true");
         }
       }
 

@@ -62,7 +62,7 @@ const Sidebar = () => {
             label: "Khen thưởng và kỉ luật",
           },
           {
-            key: "/contact",
+            key: "/contract",
             icon: <ContactsOutlined />,
             label: "Thông tin hợp đồng",
           },

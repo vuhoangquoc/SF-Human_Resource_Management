@@ -25,17 +25,17 @@ const SignupForm = () => {
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .min(8, "tên người dùng tối thiểu 8 ký tự")
-        .required("tên người dùng là bắt buộc"),
+        .min(8, "Tên người dùng tối thiểu 8 ký tự")
+        .required("Tên người dùng là bắt buộc"),
       password: Yup.string()
-        .min(8, "mật khẩu tối thiểu 8 ký tự")
-        .required("mật khẩu là bắt buộc"),
+        .min(8, "Mật khẩu tối thiểu 8 ký tự")
+        .required("Mật khẩu là bắt buộc"),
       displayName: Yup.string()
         .min(5, "Tên hiển thị tối thiểu 5 ký tự")
         .required("Tên hiển thị là bắt buộc"),
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password")], "xác nhận Mật khẩu không khớp")
-        .min(8, "xác nhận Mật khẩu tối thiểu 8 ký tự")
+        .oneOf([Yup.ref("password")], "Mật khẩu không khớp")
+        .min(8, "Mật khẩu tối thiểu 8 ký tự")
         .required("Xác nhận mật khẩu là bắt buộc"),
     }),
     onSubmit: async (values) => {
@@ -66,8 +66,8 @@ const SignupForm = () => {
     console.log("hhh", response);
     if (!response.err) {
       navigate("/signin");
-    } 
-  }
+    }
+  };
   return (
     <Box component="form" onSubmit={signinForm.handleSubmit}>
       <Stack spacing={3}>
@@ -75,7 +75,7 @@ const SignupForm = () => {
           value={signinForm.values.username}
           onChange={signinForm.handleChange}
           type="text"
-          placeholder="Họ & Tên"
+          placeholder="Tên tài khoản"
           name="username"
           fullWidth
           color="success"
@@ -92,7 +92,7 @@ const SignupForm = () => {
         />
         <TextField
           type="text"
-          placeholder="Tên hiển thị "
+          placeholder="Tên"
           name="displayName"
           fullWidth
           value={signinForm.values.displayName}
@@ -111,7 +111,8 @@ const SignupForm = () => {
             },
           }}
         />
-        <TextField style={{color: "red"}}
+        <TextField
+          style={{ color: "red" }}
           type="password"
           placeholder="Mật khẩu"
           name="password"
@@ -169,7 +170,7 @@ const SignupForm = () => {
       {errorMessage && (
         <Box sx={{ marginTop: 2 }}>
           <Alert variant="filled" severity="error">
-                đăng ký thất bại  
+            Đăng ký thất bại
           </Alert>
         </Box>
       )}

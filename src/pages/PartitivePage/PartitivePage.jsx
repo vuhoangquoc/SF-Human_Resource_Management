@@ -1,13 +1,11 @@
-import React from 'react'
-import Partitive from '../Components/Partitive'
+import React from "react";
+import Partitive from "../Components/Partitive";
 const PartitivePage = () => {
   return (
-    <div className="App">
-      <div className="SideMenuAndPageContent">
-        <Partitive/>
-      </div>
-  </div>
-  )
-}
+    <div className="SideMenuAndPageContent">
+      <Partitive />
+    </div>
+  );
+};
 
-export default PartitivePage
+export default PartitivePage;
