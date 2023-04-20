@@ -43,11 +43,11 @@ const CreateUser = () => {
         <Form.Item>
           <Input
             type="text"
-            name="user_name"
-            placeholder="Tài khoản"
-            value={username}
+            name="display_name"
+            placeholder="Tên người dùng"
+            value={displayName}
             onChange={(e) => {
-              setUserName(e.target.value);
+              setDisplayName(e.target.value);
             }}
             style={{ width: 350 }}
           />
@@ -55,11 +55,11 @@ const CreateUser = () => {
         <Form.Item>
           <Input
             type="text"
-            name="display_name"
-            placeholder="Tên"
-            value={displayName}
+            name="user_name"
+            placeholder="Tài khoản"
+            value={username}
             onChange={(e) => {
-              setDisplayName(e.target.value);
+              setUserName(e.target.value);
             }}
             style={{ width: 350 }}
           />

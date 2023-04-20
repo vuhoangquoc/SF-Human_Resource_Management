@@ -113,7 +113,7 @@ const Partitive = () => {
                   />
                 </Form.Item>
                 <Form.Item>
-                  <label htmlFor="">Mã</label>
+                  <label htmlFor="">Mã bộ phận</label>
                   <Input
                     placeholder="MPB"
                     value={departmentIdInput}
@@ -144,7 +144,7 @@ const Partitive = () => {
             key: "departmentName",
           },
           {
-            title: "Hoạt động",
+            title: "Thao tác",
             dataIndex: "status",
             key: "action",
             render: (text, record) => (

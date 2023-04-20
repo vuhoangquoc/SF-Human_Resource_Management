@@ -332,6 +332,7 @@ const PersonelPage = () => {
 
           return deletedUser;
         });
+        // dispatch(deleteUser(record));
       },
       cancelText: "Đóng",
       onCancel: () => {

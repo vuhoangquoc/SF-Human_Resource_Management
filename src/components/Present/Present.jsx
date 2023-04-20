@@ -207,7 +207,7 @@ const Present = () => {
             //   key: "index",
             //   render: (text, record, index) => index + 1,
             // },
-            { title: "Họ & Tên ", dataIndex: "username", key: "username" },
+            { title: "Họ Tên ", dataIndex: "username", key: "username" },
             {
               title: "Mã bộ phận",
               dataIndex: "departmentId",
@@ -222,7 +222,7 @@ const Present = () => {
             { title: "Thông tin", dataIndex: "content", key: "content" },
             { title: "Thời gian", dataIndex: "time", key: "time" },
             {
-              title: "Hoạt động",
+              title: "Thao tác",
               dataIndex: "status",
               key: "action",
               render: (text, record) => (
