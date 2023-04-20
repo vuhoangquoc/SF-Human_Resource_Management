@@ -19,8 +19,9 @@ const SigninForm = () => {
 
   const signinForm = useFormik({
     initialValues: {
-      password: "",
       username: "",
+      password: "",
+      
     },
     validationSchema: Yup.object({
       username: Yup.string()
@@ -65,7 +66,7 @@ const SigninForm = () => {
         <Stack spacing={3} >
           <TextField value={signinForm.values.username} onChange={signinForm.handleChange}
             type="text"
-            placeholder="Họ & Tên"
+            placeholder="Tên tài khoản"
             name="username"
             fullWidth
             color="success"
