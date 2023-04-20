@@ -3,10 +3,10 @@ import { Card, Space, Statistic, Table } from "antd";
 import {
   UserOutlined,
   AuditOutlined,
-  UserDeleteOutlined,
-  WhatsAppOutlined,
+  BorderOuterOutlined,
+  UsergroupDeleteOutlined,
 } from "@ant-design/icons";
-import { getChart, getInf, getThongKe } from "../../api";
+import { getChart } from "../../api";
 
 import {
   Chart as ChartJS,
@@ -36,20 +36,46 @@ const HomePage = () => {
   const [quit, setQuit] = useState(0);
 
   useEffect(() => {
-    getThongKe().then((res) => {
-      setStaff(res.total);
-    });
-    getChart().then((res) => {
-      setWork(res.total);
-      setRest(res.limit);
-      setQuit(res.total);
-    });
-  });
+    // lấy số lượng Staff: nhân sự
+    const localData = localStorage.getItem("usersData");
+    if (localData && localData.length !== 0) {
+      // console.log("Vũ ơi", JSON.parse(localData));
+      setStaff(JSON.parse(localData).length);
+    }
+
+    // lấy số lượng đang nghỉ phép
+    const getDataRest = localStorage.getItem("vacationMode");
+    if (JSON.parse(getDataRest) !== null) {
+      const condition = (value) => value !== false;
+      const filteredVacation = Object.entries(JSON.parse(getDataRest))
+        .filter(([key, value]) => condition(value))
+        .reduce((data, [key, value]) => {
+          data[key] = value;
+          return data;
+        }, {});
+      // console.log(filteredVacation);
+      if (getDataRest && getDataRest.length !== 0) {
+        // console.log("rest nè vũ", JSON.parse(getDataRest));
+        // setRest(Object.keys(JSON.parse(getDataRest)).length);
+        setRest(Object.keys(filteredVacation).length);
+        // console.log("Cái chi", Object.keys(JSON.parse(getDataRest)).length);
+      }
+    } else setRest(0);
+
+    // lấy số lượng đang làm việc
+    if (staff < rest) {
+      // setWork(staff);
+      // localStorage.removeItem("vacationMode");
+      // window.location.reload();
+    } else setWork(staff - rest);
+
+    setQuit(0);
+  }, [staff, rest]);
 
   return (
     <div className="HomePage">
       <Space size={12} direction="vertical">
-        {/* <Typography.Title>Home</Typography.Title> */}
+        {/* <Typography.Title>Trang chủ</Typography.Title> */}
         <Space direction="horizontal">
           <HomeCard
             icon={<UserOutlined className="icon-all icon-UserOutlined" />}
@@ -63,22 +89,22 @@ const HomePage = () => {
           ></HomeCard>
           <HomeCard
             icon={
-              <WhatsAppOutlined className="icon-all icon-WhatsAppOutlined" />
+              <UsergroupDeleteOutlined className="icon-all icon-WhatsAppOutlined" />
             }
             title={"Nghỉ phép"}
             value={rest}
           ></HomeCard>
           <HomeCard
             icon={
-              <UserDeleteOutlined className="icon-all icon-UserDeleteOutlined" />
+              <BorderOuterOutlined className="icon-all icon-UserDeleteOutlined" />
             }
-            title={"Đã nghỉ việc"}
+            title={"Phòng ban"}
             value={quit}
           ></HomeCard>
         </Space>
         <Space>
-          <Inf />
-          <Chart />
+          {/* <Inf /> */}
+          {/* <Chart /> */}
         </Space>
       </Space>
     </div>
@@ -102,10 +128,13 @@ function Inf() {
 
   useEffect(() => {
     setLoading(true);
-    getInf().then((res) => {
-      setDataSource(res.users.splice(0, 3));
-      setLoading(false);
-    });
+    // getInf().then((res) => {
+    //   setDataSource(res.users.splice(0, 3));
+    //   setLoading(false);
+    // });
+    const localData = localStorage.getItem("usersData");
+    setDataSource(JSON.parse(localData).splice(0, 3));
+    setLoading(false);
   }, []);
 
   return (
@@ -133,10 +162,10 @@ function Chart() {
   useEffect(() => {
     getChart().then((res) => {
       const labels = res.carts.map((cart) => {
-        return `User-${cart.userId}`;
+        return cart.userId;
       });
       const data = res.carts.map((cart) => {
-        return cart.discountedTotal;
+        return cart.totalQuantity;
       });
 
       const dataSource = {

@@ -1,22 +1,16 @@
 import React from "react";
-import { LoadingButton } from "@mui/lab";
-import { Alert, Box, Stack,Button,TextField } from "@mui/material";
+import { Alert, Box, Stack, Button, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { Link,useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import {  Typography} from 'antd';
 import * as Yup from "yup";
 import userApi from "../../api/moudules/user.api.js";
 import { setAuthModalOpen } from "../../Redux/Reducer/authSlice";
 import { setUser } from "../../Redux/Reducer/userSlice";
 
-const { Title } = Typography;
-
-
 const SigninForm = () => {
-  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -25,21 +19,22 @@ const SigninForm = () => {
 
   const signinForm = useFormik({
     initialValues: {
+      username: "",
       password: "",
-      username: ""
+      
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .min(8, "username minimum 8 characters")
-        .required("username is required"),
+        .min(8, "tên người dùng tối thiểu 8 ký tự")
+        .required("tên người dùng là bắt buộc"),
       password: Yup.string()
-        .min(8, "password minimum 8 characters")
-        .required("password is required")
+        .min(8, "mật khẩu tối thiểu 8 ký tự")
+        .required("mật khẩu là bắt buộc"),
     }),
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       setErrorMessage(undefined);
       setIsLoginRequest(true);
-      console.log("đăng nhập thành công ");
+      console.log("adafsdfg ");
       const { response, err } = await userApi.signin(values);
       setIsLoginRequest(false);
 
@@ -47,83 +42,96 @@ const SigninForm = () => {
         signinForm.resetForm();
         dispatch(setUser(response));
         dispatch(setAuthModalOpen(false));
-        toast.success("Sign in success");
+        toast.success("Đăng nhập thành công");
       }
 
       if (err) setErrorMessage(err.message);
-    }
+    },
   });
 
-  const handleButtionClickSignin = async()=> {
+  const handleButtionClickSignin = async () => {
     const response = await userApi.signin({
-      username: signinForm.values.username, 
-      password: signinForm.values.password});
-    console.log("hhh",response)
-    if(!response.err){
+      username: signinForm.values.username,
+      password: signinForm.values.password,
+    });
+    console.log("hhh", response);
+    if (!response.err) {
       navigate("/");
     }
   }
 
-
   return (
     <div>
-      <Title level={1} style={{textAlign: "center"}}>SIGN IN </Title>
-
       <Box component="form" onSubmit={signinForm.handleSubmit} >
         <Stack spacing={3} >
           <TextField value={signinForm.values.username} onChange={signinForm.handleChange}
             type="text"
-            placeholder="username"
+            placeholder="Tên tài khoản"
             name="username"
             fullWidth
             color="success"
-            error={signinForm.touched.username && signinForm.errors.username !== undefined}
-            helperText={signinForm.touched.username && signinForm.errors.username}
+            error={
+              signinForm.touched.username &&
+              signinForm.errors.username !== undefined
+            }
+            helperText={
+              signinForm.touched.username && signinForm.errors.username
+            }
             InputProps={{
               style: {
                 fontWeight: "bold",
-              }, 
+              },
             }}
           />
-          <TextField value={signinForm.values.password} onChange={signinForm.handleChange}
+          <TextField
+            value={signinForm.values.password}
+            onChange={signinForm.handleChange}
             type="password"
-            placeholder="Userpassword"
+            placeholder="Mật Khẩu"
             name="password"
             fullWidth
             color="primary"
-            error={signinForm.touched.password && signinForm.errors.password !== undefined}
-            helperText={signinForm.touched.password && signinForm.errors.password}
+            error={
+              signinForm.touched.password &&
+              signinForm.errors.password !== undefined
+            }
+            helperText={
+              signinForm.touched.password && signinForm.errors.password
+            }
             InputProps={{
               style: {
                 fontWeight: "bold",
-              }, 
+              },
             }}
           />
         </Stack>
 
-        <LoadingButton sx={{ marginTop: 4 }}
+        <Button
+          sx={{ marginTop: 4 }}
           type="submit"
           fullWidth
           size="large"
           variant="contained"
+
           loading={isLoginRequest}
           onClick={handleButtionClickSignin}
         >
-          sign in
-        </LoadingButton>
+          Đăng Nhập
+        </Button>
 
         <Button
+          size="large"
           fullWidth
-          sx={{ marginTop: 2 }}
+          sx={{ marginTop: 3 }}
         >
-        <Link to ="/Signup">sign up</Link>
+        <Link to ="/Signup" style={{color: "white"}}>Đăng Ký </Link>
 
         </Button>
 
         {errorMessage && (
           <Box sx={{ marginTop: 2 }}>
-            <Alert severity="error" variant="outlined" >
-              {errorMessage}
+          <Alert variant="filled" severity="error">
+                đăng nhập thất bại  
             </Alert>
           </Box>
         )}

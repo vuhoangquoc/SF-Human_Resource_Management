@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
 import { Layout,Typography } from 'antd';
-import SignupForm from '../../components/SignFrom/SignupFrom';
+import SigninForm from '../../components/SignFrom/PasswordUpdate';
 
 const { Content } = Layout;
 const { Title } = Typography;
-const SignupPage = () => {
+
+function PasswordUpdate() {
   return (
     <div>
       <Layout style={{
@@ -22,12 +23,12 @@ const SignupPage = () => {
           borderRadius: 5,
           }}
         > 
-          <Title level={1} style={{textAlign: "center", marginTop: "5px",color:"white"}}>ĐĂNG KÝ  </Title>
-          <SignupForm/> 
+           <Title level={1} style={{textAlign: "center",color: "white"}}> Đổi Mật Khẩu </Title>
+          <SigninForm/>
         </Content>
       </Layout>
     </div>
   )
 }
 
-export default SignupPage;
+export default PasswordUpdate;
