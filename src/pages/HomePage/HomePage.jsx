@@ -33,7 +33,7 @@ const HomePage = () => {
   const [staff, setStaff] = useState(0);
   const [work, setWork] = useState(0);
   const [rest, setRest] = useState(0);
-  const [quit, setQuit] = useState(0);
+  const [department, setDepartment] = useState(0);
 
   useEffect(() => {
     // lấy số lượng Staff: nhân sự
@@ -69,7 +69,11 @@ const HomePage = () => {
       // window.location.reload();
     } else setWork(staff - rest);
 
-    setQuit(0);
+    const getDepartmentData = localStorage.getItem("departmentData");
+    if (getDepartmentData && getDepartmentData.length !== 0) {
+      // console.log("Vũ ơi", JSON.parse(localData));
+      setDepartment(JSON.parse(getDepartmentData).length);
+    } else setDepartment(0);
   }, [staff, rest]);
 
   return (
@@ -99,7 +103,7 @@ const HomePage = () => {
               <BorderOuterOutlined className="icon-all icon-UserDeleteOutlined" />
             }
             title={"Phòng ban"}
-            value={quit}
+            value={department}
           ></HomeCard>
         </Space>
         <Space>

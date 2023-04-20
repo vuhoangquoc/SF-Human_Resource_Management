@@ -1,14 +1,12 @@
-import React from 'react'
-import Position from '../../components/Position/Position';
+import React from "react";
+import Position from "../../components/Position/Position";
 
 const PositionPage = () => {
   return (
-    <div className="App">
-      <div className="SideMenuAndPageContent">
-        <Position/>
-      </div>
-  </div>
-  )
-}
+    <div className="SideMenuAndPageContent">
+      <Position />
+    </div>
+  );
+};
 
 export default PositionPage;
