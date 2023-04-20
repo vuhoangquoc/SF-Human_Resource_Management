@@ -38,7 +38,7 @@ const CreateUser = () => {
   };
 
   return (
-    <Card>
+    <Card title="Đăng ký">
       <form ref={form} onSubmit={sendEmail}>
         <Form.Item>
           <Input

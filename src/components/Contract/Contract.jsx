@@ -121,15 +121,15 @@ const Contract = () => {
             onChange={handleInputCustomerName}
             placeholder="Họ tên"
           />
-          <Input
+          {/* <Input
             value={product}
             onChange={handleInputProduct}
             placeholder="Sản phẩm "
-          />
+          /> */}
           <Input
             value={totalAmount}
             onChange={handleInputTotalAmount}
-            placeholder="Giá trị"
+            placeholder="Tiền lương"
           />
         </Space>
         <Button type="primary" onClick={handleAdd}>
@@ -154,14 +154,14 @@ const Contract = () => {
                       onChange={(e) => setCustomerName(e.target.value)}
                     />
                   </Form.Item>
-                  <Form.Item>
+                  {/* <Form.Item>
                     <label htmlFor="">Sản phẩm </label>
                     <Input
                       placeholder="Sản phẩm"
                       value={product}
                       onChange={(e) => setProduct(e.target.value)}
                     />
-                  </Form.Item>
+                  </Form.Item> */}
                   <Form.Item>
                     <label htmlFor="">Giá trị</label>
                     <Input
@@ -178,28 +178,32 @@ const Contract = () => {
 
         <Table
           columns={[
-            {
-              title: "STT",
-              key: "index",
-              render: (text, record, index) => index + 1,
-            },
+            // {
+            //   title: "STT",
+            //   key: "index",
+            //   render: (text, record, index) => index + 1,
+            // },
             {
               title: "Mã hợp đồng ",
               dataIndex: "contractNumber",
               key: "contractNumber",
             },
             {
-              title: "Họ & Tên ",
+              title: "Họ tên ",
               dataIndex: "customerName",
               key: "customerName",
             },
+            // {
+            //   title: "Mã khách hàng ",
+            //   dataIndex: "customerId",
+            //   key: "customerId",
+            // },
+            // { title: "Sản phẩm ", dataIndex: "product", key: "product" },
             {
-              title: "Mã khách hàng ",
-              dataIndex: "customerId",
-              key: "customerId",
+              title: "Tiền lương",
+              dataIndex: "totalAmount",
+              key: "totalAmount",
             },
-            { title: "Sản phẩm ", dataIndex: "product", key: "product" },
-            { title: "Giá trị", dataIndex: "totalAmount", key: "totalAmount" },
             { title: "Ngày ", dataIndex: "contractDate", key: "contractDate" },
             {
               title: "Hoạt động",

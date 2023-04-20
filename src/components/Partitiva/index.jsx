@@ -105,7 +105,7 @@ const Partitive = () => {
             <>
               <Form>
                 <Form.Item>
-                  <label htmlFor="">Tên</label>
+                  <label htmlFor="">Tên phòng ban</label>
                   <Input
                     placeholder="PB"
                     value={departmentNameInput}
@@ -113,7 +113,7 @@ const Partitive = () => {
                   />
                 </Form.Item>
                 <Form.Item>
-                  <label htmlFor="">Mã bộ phận</label>
+                  <label htmlFor="">Mã phòng ban</label>
                   <Input
                     placeholder="MPB"
                     value={departmentIdInput}
@@ -128,23 +128,18 @@ const Partitive = () => {
 
       <Table
         columns={[
-          {
-            title: "STT",
-            key: "id",
-            render: (text, record, index) => index + 1,
-          },
           // {
           //   title: "STT",
-          //   dataIndex: "id",
           //   key: "id",
+          //   render: (text, record, index) => index + 1,
           // },
           {
-            title: "Mã bộ phận",
+            title: "Mã phòng ban",
             dataIndex: "departmentId",
             key: "departmentId",
           },
           {
-            title: "Tên bộ phận",
+            title: "Tên phòng ban",
             dataIndex: "departmentName",
             key: "departmentName",
           },

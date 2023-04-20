@@ -128,12 +128,12 @@ const Present = () => {
           <Input
             value={username}
             onChange={handleInputUsername}
-            placeholder="Họ & Tên"
+            placeholder="Họ tên"
           />
           <Input
             value={departmentName}
             onChange={handleInputDepartmentName}
-            placeholder="Nhập tên phòng ban"
+            placeholder="Tên phòng ban"
           />
           <Input
             value={format}
@@ -161,15 +161,15 @@ const Present = () => {
               <div>
                 <Form>
                   <Form.Item>
-                    <label htmlFor="">Họ & Tên</label>
+                    <label htmlFor="">Họ tên</label>
                     <Input
-                      placeholder="Họ & Tên"
+                      placeholder="Họ tên"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
                     />
                   </Form.Item>
                   <Form.Item>
-                    <label htmlFor="">Mã Phòng Ban </label>
+                    <label htmlFor="">Mã phòng ban</label>
                     <Input
                       placeholder="Mã phòng ban"
                       value={departmentIdInput}
@@ -177,7 +177,7 @@ const Present = () => {
                     />
                   </Form.Item>
                   <Form.Item>
-                    <label htmlFor="">Tên Bộ Phận</label>
+                    <label htmlFor="">Tên phòng ban</label>
                     <Input
                       placeholder="Tên bộ phận "
                       value={departmentName}
@@ -185,7 +185,7 @@ const Present = () => {
                     />
                   </Form.Item>
                   <Form.Item>
-                    <label htmlFor="">HÌnh Thức </label>
+                    <label htmlFor="">Hình thức</label>
                     <Input
                       placeholder="Hình thức"
                       value={format}
@@ -193,7 +193,7 @@ const Present = () => {
                     />
                   </Form.Item>
                   <Form.Item>
-                    <label htmlFor="">Thông tin </label>
+                    <label htmlFor="">Thông tin</label>
                     <Input
                       placeholder="Thông tin"
                       value={content}
@@ -207,27 +207,27 @@ const Present = () => {
         </Space>
         <Table
           columns={[
+            // {
+            //   title: "STT",
+            //   key: "index",
+            //   render: (text, record, index) => index + 1,
+            // },
+            { title: "Họ tên ", dataIndex: "username", key: "username" },
             {
-              title: "STT",
-              key: "index",
-              render: (text, record, index) => index + 1,
-            },
-            { title: "Họ & Tên ", dataIndex: "username", key: "username" },
-            {
-              title: "Mã bộ phận",
+              title: "Mã phòng ban",
               dataIndex: "departmentId",
               key: "departmentId",
             },
             {
-              title: "Tên bộ phận",
+              title: "Tên phòng ban",
               dataIndex: "departmentName",
               key: "departmentName",
             },
             { title: "Hình thức", dataIndex: "format", key: "format" },
             { title: "Thông tin", dataIndex: "content", key: "content" },
-            { title: "thời gian", dataIndex: "time", key: "time" },
+            { title: "Thời gian", dataIndex: "time", key: "time" },
             {
-              title: "Hoạt động",
+              title: "Thao tác",
               dataIndex: "status",
               key: "action",
               render: (text, record) => (

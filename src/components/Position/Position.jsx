@@ -141,23 +141,23 @@ const Position = () => {
           <Input
             value={username}
             onChange={handleInputUsername}
-            placeholder="Họ & Tên"
+            placeholder="Họ tên"
           />
           <Input
             value={gender}
             onChange={handleInputGender}
-            placeholder="Giới tính "
+            placeholder="Giới tính"
           />
           <Input value={age} onChange={handleInputAge} placeholder="Tuổi" />
           <Input
             value={departmentName}
             onChange={handleInputDepartmentName}
-            placeholder=" Tên phòng ban"
+            placeholder="Tên phòng ban"
           />
           <Input
             value={position}
             onChange={handleInputPosition}
-            placeholder="Chức Vụ"
+            placeholder="Chức vụ"
           />
         </Space>
         <Button type="primary" onClick={handleAdd}>
@@ -176,15 +176,15 @@ const Position = () => {
               <div>
                 <Form>
                   <Form.Item>
-                    <label htmlFor="">Họ & Tên</label>
+                    <label htmlFor="">Họ tên</label>
                     <Input
-                      placeholder="Họ & Tên"
+                      placeholder="Họ tên"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
                     />
                   </Form.Item>
                   <Form.Item>
-                    <label htmlFor="">Giới tính </label>
+                    <label htmlFor="">Giới tính</label>
                     <Input
                       placeholder="Giới tính"
                       value={gender}
@@ -192,7 +192,7 @@ const Position = () => {
                     />
                   </Form.Item>
                   <Form.Item>
-                    <label htmlFor="">Tuổi </label>
+                    <label htmlFor="">Tuổi</label>
                     <Input
                       placeholder="Tuổi"
                       value={age}
@@ -200,7 +200,7 @@ const Position = () => {
                     />
                   </Form.Item>
                   <Form.Item>
-                    <label htmlFor="">Mã Phòng Ban </label>
+                    <label htmlFor="">Mã phòng ban</label>
                     <Input
                       placeholder="Mã phòng ban"
                       value={departmentIdInput}
@@ -208,7 +208,7 @@ const Position = () => {
                     />
                   </Form.Item>
                   <Form.Item>
-                    <label htmlFor="">Tên Bộ Phận</label>
+                    <label htmlFor="">Tên phòng ban</label>
                     <Input
                       placeholder="Tên bộ phận "
                       value={departmentName}
@@ -216,7 +216,7 @@ const Position = () => {
                     />
                   </Form.Item>
                   <Form.Item>
-                    <label htmlFor="">Chức vụ </label>
+                    <label htmlFor="">Chức vụ</label>
                     <Input
                       placeholder="Chức vụ"
                       value={position}
@@ -231,27 +231,27 @@ const Position = () => {
 
         <Table
           columns={[
+            // {
+            //   title: "STT",
+            //   key: "index",
+            //   render: (text, record, index) => index + 1,
+            // },
+            { title: "Họ tên", dataIndex: "username", key: "username" },
+            { title: "Giới tính", dataIndex: "gender", key: "gender" },
+            { title: "Tuổi", dataIndex: "age", key: "age" },
             {
-              title: "STT",
-              key: "index",
-              render: (text, record, index) => index + 1,
-            },
-            { title: "Họ & Tên ", dataIndex: "username", key: "username" },
-            { title: "Giới tính ", dataIndex: "gender", key: "gender" },
-            { title: "Tuổi ", dataIndex: "age", key: "age" },
-            {
-              title: "Mã bộ phận",
+              title: "Mã phòng ban",
               dataIndex: "departmentId",
               key: "departmentId",
             },
             {
-              title: "Tên bộ phận",
+              title: "Tên phòng ban",
               dataIndex: "departmentName",
               key: "departmentName",
             },
             { title: "Chức vụ", dataIndex: "position", key: "postion" },
             {
-              title: "Hoạt động",
+              title: "Thao tác",
               dataIndex: "status",
               key: "action",
               render: (text, record) => (
