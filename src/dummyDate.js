@@ -31,29 +31,48 @@ export const PresentData = [
     departmentId: "DG123",
     departmentName: "Markerting ",
     format:"khen thưởng",
-    content:"Hoàn thành tốt nhiệm vụ được giao",
+    content:"Hoàn thành tốt ",
     time:"2023-04-19T02:39:35.266Z",
     status: "",
-
   },
   {
     id: 2,
     username:"Nguyễn Văn Hoàng",
     departmentId: "DG13",
     departmentName: "Markerting ",
-    format: "kỉ luật",
-    content:"chậm trễ dự án ",
+    format: "Kỉ luật",
+    content:"Chậm trễ dự án ",
     time:"2023-04-19T02:39:02.641Z",
     status: "",
-
   },
   {
     id: 3,
     username:"Nguyễn Văn Mạnh",
+    departmentId: "DG243",
+    departmentName: "IT ",
+    format: "Khen thưởng ",
+    content:"Vượt chỉ tiêu",
+    time:"2023-04-19T02:35:07.130Z",
+    status: "",
+  },
+  {
+    id: 4,
+    username:"Nguyễn Văn Hải",
     departmentId: "DG23",
     departmentName: "IT ",
-    format: "khen thưởng ",
-    content:"vượt chỉ tiêu",
+    format: "Khen thưởng ",
+    content:"Vượt chỉ tiêu",
+    time:"2023-04-19T02:35:07.130Z",
+    status: "",
+
+  },
+  {
+    id: 5,
+    username:"Nguyễn Văn Cao",
+    departmentId: "DG233",
+    departmentName: "IT ",
+    format: "Khen thưởng ",
+    content:"Vượt chỉ tiêu",
     time:"2023-04-19T02:35:07.130Z",
     status: "",
 
@@ -63,7 +82,7 @@ export const PresentData = [
 export const PositionData = [
   {
     id: 1,
-    username: "Nguyễn Văn A",
+    username: "Nguyễn Văn Nam",
     gender: "Nam",
     age: 23,
     departmentId: "DG123",
@@ -73,7 +92,7 @@ export const PositionData = [
   },
   {
     id: 2,
-    username: "Nguyễn Văn B",
+    username: "Nguyễn Văn Hải",
     gender: "Nam",
     age: 25,
     departmentId: "DS343",
@@ -83,12 +102,22 @@ export const PositionData = [
   },
   {
     id: 3,
-    username: "Nguyễn Văn A",
+    username: "Nguyễn Văn Hùng",
     gender: "Nam",
     age: 23,
     departmentId: "DC12",
     departmentName: "Markerting ",
     position: "Phó Phòng",
+
+  },
+  {
+    id: 3,
+    username: "Nguyễn Văn Hà",
+    gender: "Nam",
+    age: 23,
+    departmentId: "DC32",
+    departmentName: "Markerting ",
+    position: "Nhân Viên",
 
   },
 ]

@@ -47,7 +47,7 @@ const Sidebar = () => {
             label: "Phòng ban",
           },
           {
-            key: "/adduser",
+            key: "/createuser",
             icon: <UsergroupAddOutlined />,
             label: "Người dùng",
           },

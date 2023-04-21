@@ -118,7 +118,7 @@ const Present = () => {
 return (
     <div>
       <Space size={20} direction="vertical">
-      {/* thêm */}
+      
       <Space size="middle">
         <Input value={username} onChange={handleInputUsername} placeholder="Họ & Tên"/>
         <Input value={departmentName} onChange={handleInputDepartmentName} placeholder="Nhập tên phòng ban"/>
@@ -126,7 +126,7 @@ return (
         <Input value={content} onChange={ handleInputContent} placeholder="Thông tin"/>
       </Space>
       <Button type="primary" onClick={handleAdd}>Thêm</Button>
-     {/* sửa */}
+ 
      <Space>
         <Modal title="Sửa" visible={modalVisible} onOk={handleSave} onCancel={handleCancel} >
           {selectedRow && (

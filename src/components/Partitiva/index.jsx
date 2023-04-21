@@ -6,7 +6,7 @@ import { PartitiveData } from "../../dummyDate";
 const Partitive = () => {
   const [data, setData] = useState();
   const [inputValue, setInputValue] = useState("");
-  
+
   const [selectedRow, setSelectedRow] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [departmentNameInput, setDepartmentName] = useState("");
@@ -23,13 +23,16 @@ const Partitive = () => {
   }, []);
 
   const handleAdd = (record, values) => {
+    const randomNumber = parseInt(Math.random() * 1000);
     const newItem = {
-      id: data.length + 1,
+      id: randomNumber,
       departmentId: "SF" + Math.floor(Math.random() * 1000),
       departmentName: inputValue,
       status: "",
     };
-    setData([...data, newItem]);
+    setData(() => {
+      return [...data, newItem];
+    });
     localStorage.setItem("departmentData", JSON.stringify([...data, newItem]));
     setInputValue("");
   };
@@ -86,7 +89,9 @@ const Partitive = () => {
           onChange={handleInputChange}
           placeholder="Nhập tên phòng ban"
         />
-        <Button onClick={handleAdd}>Thêm</Button>
+        <Button type="primary" onClick={handleAdd}>
+          Thêm
+        </Button>
       </Space>
 
       <Space>
@@ -100,7 +105,7 @@ const Partitive = () => {
             <>
               <Form>
                 <Form.Item>
-                  <label htmlFor="">Tên</label>
+                  <label htmlFor="">Tên phòng ban</label>
                   <Input
                     placeholder="PB"
                     value={departmentNameInput}
@@ -108,7 +113,7 @@ const Partitive = () => {
                   />
                 </Form.Item>
                 <Form.Item>
-                  <label htmlFor="">Mã</label>
+                  <label htmlFor="">Mã phòng ban</label>
                   <Input
                     placeholder="MPB"
                     value={departmentIdInput}
@@ -123,23 +128,23 @@ const Partitive = () => {
 
       <Table
         columns={[
+          // {
+          //   title: "STT",
+          //   key: "id",
+          //   render: (text, record, index) => index + 1,
+          // },
           {
-            title: "STT",
-            key: "id", 
-            render: (text,record,index)=> index+1
-          },
-          {
-            title: "Mã bộ phận",
+            title: "Mã phòng ban",
             dataIndex: "departmentId",
             key: "departmentId",
           },
           {
-            title: "Tên bộ phận",
+            title: "Tên phòng ban",
             dataIndex: "departmentName",
             key: "departmentName",
           },
           {
-            title: "Hoạt động",
+            title: "Thao tác",
             dataIndex: "status",
             key: "action",
             render: (text, record) => (

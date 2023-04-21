@@ -1,8 +1,9 @@
 import React from "react";
 import { UserAddOutlined, DownOutlined } from "@ant-design/icons";
-import { Avatar, Dropdown, Space } from "antd";
-import { Link } from "react-router-dom";
+import { Avatar, Button, Dropdown, Space } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 const User = () => {
+  const navigate = useNavigate();
   const user = {
     // name: "Vũ Hoàng",
     // image: "https://avatars.githubusercontent.com/u/103670048?v=4",
@@ -47,11 +48,16 @@ const User = () => {
             ),
           },
           {
-            key: "3",
+            key: "4",
             label: (
-              <Link to="/signin">
-                <div>Đăng xuất</div>
-              </Link>
+              <Button
+                onClick={() => {
+                  localStorage.removeItem("isLoggedIn");
+                  navigate("/signin");
+                }}
+              >
+                Đăng xuất
+              </Button>
             ),
           },
         ]
@@ -60,18 +66,16 @@ const User = () => {
   return (
     <div style={{ cursor: "pointer" }}>
       <Dropdown menu={{ items }}>
-        {/* <a onClick={(e) => e.preventDefault()}> */}
-
         <Space>
           <Avatar
             size="default"
             icon={<UserAddOutlined />}
-            src={user.image || ""}
+            // src={user.image || ""}
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8t4tE4MIKosJILqAvmB-hg3ognAutIw01UQ&usqp=CAU"
           ></Avatar>
-          <span>{user.name || "Người dùng"}</span>
+          <span>{user.name || "Admin"}</span>
           <DownOutlined />
         </Space>
-        {/* </a> */}
       </Dropdown>
     </div>
   );
