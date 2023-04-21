@@ -4,20 +4,12 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { ContractData } from "../../dummyDate";
 const Contract = () => {
   const [data, setData] = useState();
-
-  const [departmentName, setDepartmentName] = useState("");
-  const [gender, setGender] = useState("");
-  const [age, setAge] = useState("");
-  const [username, setUsername] = useState("");
-  const [position, setPosition] = useState("");
-
   const [customerName, setCustomerName] = useState("");
   const [product, setProduct] = useState("");
   const [totalAmount, setTotalAmount] = useState("");
 
   const [selectedRow, setSelectedRow] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const [departmentIdInput, setDepartmentId] = useState("");
 
   // lấy data từ api
   useEffect(() => {
