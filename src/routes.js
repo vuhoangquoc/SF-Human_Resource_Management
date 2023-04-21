@@ -11,13 +11,14 @@ import CreateUser from "./pages/CreateUser/CreateUser";
 import PresentPage from "./pages/PresentPage/PresentPage";
 import PositionPage from "./pages/PositionPage/PositivePage";
 import ContractPage from "./pages/ContractPage/ContractPage";
+import NotFound from "./pages/404/404";
 
 const isLogin = localStorage.getItem("isLoggedIn") === "true";
 const router = createBrowserRouter([
   {
     // path: "/",
     element: <MainLayout />,
-    errorElement: <h1>404 NOT FOUND</h1>,
+    errorElement: <NotFound />,
     children: isLogin
       ? [
           { path: "/", element: <HomePage /> },

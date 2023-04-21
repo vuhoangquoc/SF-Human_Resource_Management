@@ -15,9 +15,11 @@ const Present = () => {
 
   // lấy data từ api
   useEffect(() => {
-    const departmentData = JSON.parse(localStorage.getItem("departmentData"));
-    if (departmentData && departmentData.length !== 0) {
-      setData(departmentData);
+    const departmentPresentData = JSON.parse(
+      localStorage.getItem("departmentPresentData")
+    );
+    if (departmentPresentData && departmentPresentData.length !== 0) {
+      setData(departmentPresentData);
     } else {
       setData(PresentData);
       localStorage.setItem(
@@ -29,9 +31,8 @@ const Present = () => {
 
   //thêm data vào
   const handleAdd = (record, values) => {
-    const randomNumber = parseInt(Math.random() * 1000);
     const newItem = {
-      id: randomNumber,
+      id: data.length + 1,
       username: username,
       departmentId: "SF" + Math.floor(Math.random() * 1000),
       departmentName: departmentName,
@@ -123,7 +124,6 @@ const Present = () => {
   return (
     <div>
       <Space size={20} direction="vertical">
-        {/* thêm */}
         <Space size="middle">
           <Input
             value={username}
@@ -149,7 +149,6 @@ const Present = () => {
         <Button type="primary" onClick={handleAdd}>
           Thêm
         </Button>
-        {/* sửa */}
         <Space>
           <Modal
             title="Sửa"
@@ -169,7 +168,7 @@ const Present = () => {
                     />
                   </Form.Item>
                   <Form.Item>
-                    <label htmlFor="">Mã phòng ban</label>
+                    <label htmlFor="">Mã phòng ban </label>
                     <Input
                       placeholder="Mã phòng ban"
                       value={departmentIdInput}
@@ -177,7 +176,7 @@ const Present = () => {
                     />
                   </Form.Item>
                   <Form.Item>
-                    <label htmlFor="">Tên phòng ban</label>
+                    <label htmlFor="">Tên bộ phận</label>
                     <Input
                       placeholder="Tên bộ phận "
                       value={departmentName}
@@ -207,25 +206,21 @@ const Present = () => {
         </Space>
         <Table
           columns={[
-            // {
-            //   title: "STT",
-            //   key: "index",
-            //   render: (text, record, index) => index + 1,
-            // },
+            // { title: "STT", key:"index", render: (text,record,index)=> index+1},
             { title: "Họ tên ", dataIndex: "username", key: "username" },
             {
-              title: "Mã phòng ban",
+              title: "Mã bộ phận",
               dataIndex: "departmentId",
               key: "departmentId",
             },
             {
-              title: "Tên phòng ban",
+              title: "Tên bộ phận",
               dataIndex: "departmentName",
               key: "departmentName",
             },
             { title: "Hình thức", dataIndex: "format", key: "format" },
             { title: "Thông tin", dataIndex: "content", key: "content" },
-            { title: "Thời gian", dataIndex: "time", key: "time" },
+            // { title: "Thời gian", dataIndex: "time", key: "time" },
             {
               title: "Thao tác",
               dataIndex: "status",
