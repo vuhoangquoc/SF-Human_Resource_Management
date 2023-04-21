@@ -31,8 +31,9 @@ const Present = () => {
 
   //thêm data vào
   const handleAdd = (record, values) => {
+    const randomNumber = parseInt(Math.random() * 1000);
     const newItem = {
-      id: data.length + 1,
+      id: randomNumber,
       username: username,
       departmentId: "SF" + Math.floor(Math.random() * 1000),
       departmentName: departmentName,
@@ -149,6 +150,7 @@ const Present = () => {
         <Button type="primary" onClick={handleAdd}>
           Thêm
         </Button>
+
         <Space>
           <Modal
             title="Sửa"
@@ -220,7 +222,7 @@ const Present = () => {
             },
             { title: "Hình thức", dataIndex: "format", key: "format" },
             { title: "Thông tin", dataIndex: "content", key: "content" },
-            // { title: "Thời gian", dataIndex: "time", key: "time" },
+            { title: "Thời gian", dataIndex: "time", key: "time" },
             {
               title: "Thao tác",
               dataIndex: "status",
