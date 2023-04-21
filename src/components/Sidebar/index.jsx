@@ -32,7 +32,7 @@ const Sidebar = () => {
         selectedKeys={[selectedKeys]}
         items={[
           {
-            key: "/",
+            key: "/home",
             icon: <HomeOutlined />,
             label: "Trang chủ",
           },

@@ -111,7 +111,7 @@ const PasswordUpdate = () => {
           {errorMessage && (
             <Box sx={{ marginTop: 2 }}>
               <Alert variant="filled" severity="error">
-                 mật khẩu cũ không chính xác!
+                 Mật khẩu cũ không chính xác!
             </Alert>
           </Box>
           )}

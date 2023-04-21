@@ -145,11 +145,11 @@ return (
                   <Input placeholder="Tên bộ phận " value={departmentName} onChange={(e) => setDepartmentName(e.target.value)}/>
                 </Form.Item>
                 <Form.Item>
-                  <label htmlFor="">HÌnh Thức </label>
+                  <label htmlFor="">Hình Thức </label>
                   <Input placeholder="Hình thức" value={format} onChange={(e) => setFormat(e.target.value)} />
                 </Form.Item>
                 <Form.Item>
-                  <label htmlFor="">Thông tin  </label>
+                  <label htmlFor="">Thông Tin  </label>
                   <Input placeholder="Thông tin" value={content} onChange={(e) => setContent(e.target.value)} />
                 </Form.Item>
               </Form>

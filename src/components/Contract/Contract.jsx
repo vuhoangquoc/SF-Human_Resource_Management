@@ -4,20 +4,12 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import {ContractData } from '../../dummyDate';
 const Contract = () => {
   const [data, setData] = useState();
-
-  const [departmentName, setDepartmentName] = useState("");
-  const [gender, setGender] = useState("");
-  const [age, setAge] = useState("");
-  const [username, setUsername] = useState("");
-  const [position, setPosition] = useState("");
-
   const [customerName, setCustomerName] = useState("");
   const [ product, setProduct] = useState("");
   const [ totalAmount, setTotalAmount] = useState("");
 
   const [selectedRow, setSelectedRow] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const [departmentIdInput, setDepartmentId] = useState("");
 
   // lấy data từ api    
   useEffect(() => {
@@ -145,8 +137,7 @@ const Contract = () => {
           { title: "Mã hợp đồng ", dataIndex: "contractNumber", key: "contractNumber"},
           { title: "Họ & Tên ", dataIndex: "customerName", key: "customerName"},
           { title: "Mã khách hàng ", dataIndex: "customerId", key: "customerId"},
-          { title: "Sản phẩm ", dataIndex: "product", key: "product"},
-          { title: "Giá trị", dataIndex: "totalAmount", key: "totalAmount"},
+          { title: "Mức lương", dataIndex: "totalAmount", key: "totalAmount"},
           { title: "Ngày ", dataIndex: "contractDate", key: "contractDate" },
           { title: "Hoạt động", dataIndex: "status", key: "action",
             render: (text, record) => (

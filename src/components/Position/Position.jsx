@@ -145,7 +145,7 @@ const Position = () => {
                   <Input placeholder="Họ & Tên" value={username} onChange={(e) => setUsername(e.target.value)} />
                 </Form.Item>
                 <Form.Item>
-                  <label htmlFor="">Giới tính </label>
+                  <label htmlFor="">Giới Tính </label>
                   <Input placeholder="Giới tính" value={gender} onChange={(e) => setGender(e.target.value)} />
                 </Form.Item>
                 <Form.Item>
@@ -161,7 +161,7 @@ const Position = () => {
                   <Input placeholder="Tên bộ phận " value={departmentName} onChange={(e) => setDepartmentName(e.target.value)}/>
                 </Form.Item>
                 <Form.Item>
-                  <label htmlFor="">Chức vụ  </label>
+                  <label htmlFor="">Chức Vụ  </label>
                   <Input placeholder="Chức vụ" value={position} onChange={(e) => setPosition(e.target.value)} />
                 </Form.Item>
               </Form>

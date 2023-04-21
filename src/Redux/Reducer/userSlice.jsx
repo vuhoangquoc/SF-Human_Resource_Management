@@ -10,7 +10,7 @@ export const userSlice = createSlice({
     setUser: (state, action) => {
       if (action.payload === null) {
         localStorage.removeItem("actkn");
-      } else {
+      } else { 
         if (action.payload.token) localStorage.setItem("actkn", action.payload.token);
       }
 
