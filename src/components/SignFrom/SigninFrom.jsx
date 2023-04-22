@@ -44,6 +44,7 @@ const SigninForm = () => {
         toast("Đăng nhập thành công", { type: "success" });
         setTimeout(() => {
           navigate("/");
+          window.location.reload();
         });
       }
 
