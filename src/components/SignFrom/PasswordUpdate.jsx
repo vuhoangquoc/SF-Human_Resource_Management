@@ -1,9 +1,9 @@
 import { LoadingButton } from "@mui/lab";
 import { Box, Stack, TextField, Alert } from "@mui/material";
 import { useFormik } from "formik";
+import * as React from 'react';
 import * as Yup from "yup";
 import { useState } from "react";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -13,10 +13,11 @@ import { setAuthModalOpen } from "../../Redux/Reducer/authSlice";
 
 const PasswordUpdate = () => {
   const [onRequest, setOnRequest] = useState(false);
-  const [errorMessage, setErrorMessage] = useState();
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
 
   const form = useFormik({
     initialValues: {
@@ -42,21 +43,20 @@ const PasswordUpdate = () => {
   const onUpdate = async (values) => {
     if (onRequest) return;
     setOnRequest(true);
-    setErrorMessage(undefined);
-
     const { response, err } = await userApi.passwordUpdate(values);
-
     setOnRequest(false);
 
-    if (err) toast.error(err.message);
     if (response) {
       form.resetForm();
-      navigate("/");
       dispatch(setUser(null));
       dispatch(setAuthModalOpen(true));
-      toast.success("Cập nhật mật khẩu thành công! Vui lòng đăng nhập lại");
+      setTimeout(() => {
+        navigate("/");
+      },1000);
     }
+    
     if (err) setErrorMessage(err.message);
+    else setErrorMessage(null);
   };
 
   return (
@@ -82,10 +82,9 @@ const PasswordUpdate = () => {
             value={form.values.newPassword}
             onChange={form.handleChange}
             color="success"
-            error={
-              form.touched.newPassword && form.errors.newPassword !== undefined
-            }
+            error={form.touched.newPassword && form.errors.newPassword !== undefined}
             helperText={form.touched.newPassword && form.errors.newPassword}
+          
           />
           <TextField
             type="password"
@@ -118,6 +117,13 @@ const PasswordUpdate = () => {
           <Box sx={{ marginTop: 2 }}>
             <Alert variant="filled" severity="error">
               Mật khẩu cũ không chính xác!
+            </Alert>
+          </Box>
+        )}
+        {errorMessage === null && (
+          <Box sx={{ marginTop: 2 }}>
+            <Alert variant="filled" severity="success">
+              Đổi mật Khẩu thành công
             </Alert>
           </Box>
         )}

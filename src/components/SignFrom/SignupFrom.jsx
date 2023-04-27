@@ -2,7 +2,6 @@ import { Alert, Box, Button, Stack, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { setAuthModalOpen } from "../../Redux/Reducer/authSlice";
@@ -14,7 +13,7 @@ const SignupForm = () => {
   const dispatch = useDispatch();
 
   const [isLoginRequest, setIsLoginRequest] = useState(false);
-  const [errorMessage, setErrorMessage] = useState();
+  const [errorMessage, setErrorMessage] = useState("");
 
   const signinForm = useFormik({
     initialValues: {
@@ -39,35 +38,29 @@ const SignupForm = () => {
         .required("Xác nhận mật khẩu là bắt buộc"),
     }),
     onSubmit: async (values) => {
-      setErrorMessage(undefined);
+      
       setIsLoginRequest(true);
       console.log("asdasdasdasd");
       const { response, err } = await userApi.signup(values);
       setIsLoginRequest(false);
 
+      if (err) setErrorMessage(err.message);
+      else setErrorMessage(null);
+
+
       if (response) {
         signinForm.resetForm();
         dispatch(setUser(response));
         dispatch(setAuthModalOpen(false));
-        toast.success("Đăng ký thành công");
+        setTimeout(() => {
+          navigate("/signin");
+        },1000);
       }
-
-      if (err) setErrorMessage(err.message);
     },
+    
   });
 
-  const handleButtionClickSignup = async () => {
-    const response = await userApi.signup({
-      username: signinForm.values.username,
-      password: signinForm.values.password,
-      displayName: signinForm.values.password,
-      confirmPassword: signinForm.values.confirmPassword,
-    });
-    console.log("hhh", response);
-    if (!response.err) {
-      navigate("/signin");
-    }
-  };
+
   return (
     <Box component="form" onSubmit={signinForm.handleSubmit}>
       <Stack spacing={3}>
@@ -162,7 +155,6 @@ const SignupForm = () => {
         variant="contained"
         sx={{ marginTop: 4 }}
         loading={isLoginRequest}
-        onClick={handleButtionClickSignup}
       >
         Đăng Ký
       </Button>
@@ -171,6 +163,13 @@ const SignupForm = () => {
         <Box sx={{ marginTop: 2 }}>
           <Alert variant="filled" severity="error">
             Đăng ký thất bại
+          </Alert>
+        </Box>
+      )}
+      {errorMessage == null && (
+        <Box sx={{ marginTop: 2 }}>
+          <Alert variant="filled" severity="success">
+            Đăng ký thành công 
           </Alert>
         </Box>
       )}
